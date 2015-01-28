@@ -1,0 +1,66 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ */
+
+/* Custom colours */
+.alizarin {
+  background-color: #e74c3c !important; }
+
+.alizarin-text {
+  color: #e74c3c !important; }
+
+.green-sea {
+  background-color: #16a085 !important; }
+
+.green-sea-text {
+  color: #16a085 !important; }
+
+.icon-block {
+  padding: 0 15px;
+}
+
+body {
+  background: gray url('../../images/bg.jpg') center top;
+}
+
+@media only screen and (min-width : 601px) {
+  nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+    height: 46px;
+    line-height: 46px;
+  }
+
+  nav .nav-wrapper i {
+    font-size: 2rem;
+  }
+
+  .navbar-fixed {
+    height: 46px;
+  }
+
+}
+
+#logo-container img {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.header {
+  font-weight: 700;
+}
+
+.card a {
+  text-transform: none;
+}
+
+footer.page-footer {
+  background-color: transparent; }
+  footer.page-footer .footer-copyright {
+    overflow: hidden;
+    height: 50px;
+    line-height: 50px;
+    color: rgba(255, 255, 255, 0.8);
+    background-color: transparent;
+    text-align: center }
