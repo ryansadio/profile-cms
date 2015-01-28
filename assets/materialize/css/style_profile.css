@@ -6,6 +6,20 @@
  * Made By MaterializeCSS.com
  */
 
+.midnight_blue {
+  background-color: #002F42 !important; }
+
+.midnight_blue-text {
+  color: #002F42 !important; }
+
+h2 {
+  margin: 1.78rem 0 0 0;
+}
+
+h5 {
+  margin: 0 0 0.656rem 0;
+}
+
 nav ul a,
 nav .brand-logo {
   color: #444;
@@ -37,6 +51,11 @@ p {
   #index-banner .section {
     top: 10%;
   }
+}
+
+.padded {
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 
