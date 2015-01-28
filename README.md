@@ -15,6 +15,13 @@ Then to call your view go:
 ````
 $this->smarty->display("nameoftemplate.tpl");
 ````
+This would then load the nameoftemplate.tpl file in application/views/templates and then replace all {$template-value-name}
+values with "value to pass"
+
+Smarty documentation is available here: <a href="http://www.smarty.net/crash_course">http://www.smarty.net/crash_course</a>
+
+<br><br>
+
 In application/libraries/Smarty.php you can also view the custom "view" function. This has been defined as a convenience
 function to act as the parser->parse() function but with the smarty engine. To use it, use it the same as the CodeIgniter
 parser:
