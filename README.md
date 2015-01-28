@@ -33,7 +33,7 @@ The tutorial to install this add-on and whatever documentation by them is avilab
 <a href="http://www.coolphptools.com/codeigniter-smarty">http://www.coolphptools.com/codeigniter-smarty</a>
 
 ##Directories Reference:
-Smarty.php (configuration file) - application/libraries/Smarty.php
-Smarty core - system/libs/smarty
-Smarty templates - application/views/templates
-Smarty compiled templates (do not touch) - application/views/templates_c
+Smarty.php (configuration file) - application/libraries/Smarty.php <br>
+Smarty core - system/libs/smarty <br>
+Smarty templates - application/views/templates <br>
+Smarty compiled templates (do not touch) - application/views/templates_c <br>
