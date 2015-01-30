@@ -3,8 +3,19 @@
  * Use this file to override Materialize files so you can update
  * the core Materialize files in the future
  *
- * Made By MaterializeCSS.com
  */
+
+.alizarin {
+  background-color: #e74c3c !important; }
+
+.alizarin-text {
+  color: #e74c3c !important; }
+
+.green-sea {
+  background-color: #16a085 !important; }
+
+.green-sea-text {
+  color: #16a085 !important; }
 
 .midnight_blue {
   background-color: #002F42 !important; }
