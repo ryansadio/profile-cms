@@ -37,24 +37,13 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Class Home - displays all pages for the users profile and all interactions from the "public" side of the user's profile
+ */
 class Home extends CI_Controller {
 
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     * 		http://example.com/index.php/welcome
-     *	- or -
-     * 		http://example.com/index.php/welcome/index
-     *	- or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     * @see http://codeigniter.com/user_guide/general/urls.html
-     */
-    public function index()
+
+   /* public function index()
     {
         // Header items
         $this->smarty->assign("title", "Ben Soer");
@@ -67,6 +56,57 @@ class Home extends CI_Controller {
 
         // Render page
         $this->smarty->display("home.tpl");
+    }*/
+
+    public function profile($profileName)
+    {
+        // Header items
+        $this->smarty->assign("title", "Ben Soer");
+        $this->smarty->assign("profile_name", $profileName); // entered name is then assigned to links that lead to its own page
+        $this->smarty->assign("image", "../../assets/images/me.jpg");
+        $this->smarty->assign("name", "Ben Soer");
+        $this->smarty->assign("job", "Web Developer");
+        $this->smarty->assign("email", "bsoer@bensoer.com");
+        $this->smarty->assign("base_colour", "midnight_blue");
+        $this->smarty->assign("accent_colour", "alizarin");
+
+        // Render page
+        $this->smarty->display("home.tpl");
+    }
+
+    public function resume($profileName)
+    {
+        // Header items
+        $this->smarty->assign("title", "Ben Soer");
+        $this->smarty->assign("profile_name", $profileName); // entered name is then assigned to links that lead to its own page
+        $this->smarty->assign("image", "../../assets/images/me.jpg");
+        $this->smarty->assign("name", "Ben Soer");
+        $this->smarty->assign("job", "Web Developer");
+        $this->smarty->assign("email", "bsoer@bensoer.com");
+        $this->smarty->assign("base_colour", "midnight_blue");
+        $this->smarty->assign("accent_colour", "alizarin");
+
+        // Content
+        $this->smarty->assign("url", "../../assets/pdfs/Untitled.pdf");
+
+        // Render page
+        $this->smarty->display("resume.tpl");
+    }
+
+    public function projects($profileName)
+    {
+        // Header items
+        $this->smarty->assign("title", "Ben Soer");
+        $this->smarty->assign("profile_name", $profileName); // entered name is then assigned to links that lead to its own page
+        $this->smarty->assign("image", "../../assets/images/me.jpg");
+        $this->smarty->assign("name", "Ben Soer");
+        $this->smarty->assign("job", "Web Developer");
+        $this->smarty->assign("email", "bsoer@bensoer.com");
+        $this->smarty->assign("base_colour", "midnight_blue");
+        $this->smarty->assign("accent_colour", "alizarin");
+
+        // Render page
+        $this->smarty->display("project.tpl");
     }
 }
 

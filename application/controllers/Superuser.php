@@ -37,6 +37,10 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Class Superuser - this controller displays statistical information about the accounts on the website. Management of
+ * accounts will be executed through this controller
+ */
 class Superuser extends CI_Controller {
 
 	/**

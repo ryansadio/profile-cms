@@ -89,5 +89,12 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+// profile page rerouting
+$route['profile/(:any)'] = 'home/profile/$1';
+$route['profile/(:any)/projects'] = 'home/projects/$1';
+$route['profile/(:any)/resume'] = 'home/resume/$1';
+
+
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

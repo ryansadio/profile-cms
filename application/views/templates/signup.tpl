@@ -7,23 +7,23 @@
                 <div class="row">
                     <div class="row">
                         <div class="col s1"><p>&nbsp;</p></div>
-                        <form class="col s10">
+                        <form class="col s10" action="/signup" method="POST">
                             <span class="card-title grey-text">New to Voodoo? Sign up.</span>
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input id="full_name" type="text" class="validate">
+                                    <input id="full_name" name="full_name" type="text" class="validate">
                                     <label for="full_name">Full Name</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input id="email" type="email" class="validate">
+                                    <input id="email" name="email" type="email" class="validate">
                                     <label for="email">Email</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input id="password" type="password" class="validate">
+                                    <input id="password" name="password" type="password" class="validate">
                                     <label for="password">New Password</label>
                                 </div>
                             </div>
@@ -32,6 +32,7 @@
                             </button>
                             <div class="row">
                                 <div class="col s12">
+                                    {$notification|default:''}
                                     Already have an account? <a class="green-sea-text" href="/">Login</a>
                                 </div>
                             </div>
