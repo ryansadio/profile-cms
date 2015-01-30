@@ -37,7 +37,7 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Superuser extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -56,8 +56,8 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->smarty->assign("title", "Welcome");
-		$this->smarty->display("welcome.tpl");
+		$this->smarty->assign("title", "Superuser");
+		$this->smarty->display("superuser.tpl");
 	}
 }
 
