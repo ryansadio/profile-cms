@@ -46,14 +46,28 @@ class Profileeditor extends CI_Controller {
 
     public function index()
     {
-        // Header items
+        // Story & About
         $this->smarty->assign("title", "Ben Soer");
-        $this->smarty->assign("image", "../../assets/images/me.jpg");
+        $this->smarty->assign("username", "bensoer");
         $this->smarty->assign("name", "Ben Soer");
+        $this->smarty->assign("image", "../../assets/images/me.jpg");
         $this->smarty->assign("job", "Web Developer");
         $this->smarty->assign("email", "bsoer@bensoer.com");
         $this->smarty->assign("base_colour", "midnight_blue");
-        $this->smarty->assign("accent_colour", "alizarin");
+        $this->smarty->assign("accent_colour_text", "alizarin-text");
+        $this->smarty->assign("linkedin", "http://linkedin.com/bensoer");
+        $this->smarty->assign("github", "http://github.com/bensoer");
+        $this->smarty->assign("twitter", "http://twitter.com/bensoer");
+
+        // Project(s); Pass an array for the projects???
+        $this->smarty->assign("p1_image", "http://placehold.it/350x250");
+        $this->smarty->assign("p1_title", "Codefire");
+        $this->smarty->assign("p1_description", "Insert description here.");
+        $this->smarty->assign("p1_link", "http://codefire.io/");
+        $this->smarty->assign("p1_github", "http://github.com/codefire");
+
+        // Resume
+        $this->smarty->assign("url", "../../assets/pdfs/Untitled.pdf");
 
         // Render page
         $this->smarty->display("profileeditor.tpl");
