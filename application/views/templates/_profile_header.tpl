@@ -33,13 +33,13 @@
         <div class="nav-wrapper">
             <div class="row">
                 <div class="col s4 center active">
-                    <a href="/">Home</a>
+                    <a href="/profile/{$profile_name}">Home</a>
                 </div>
                 <div class="col s4 center">
-                    <a href="#">Projects</a>
+                    <a href="/profile/{$profile_name}/projects">Projects</a>
                 </div>
                 <div class="col s4 center">
-                    <a href="#">Resume</a>
+                    <a href="/profile/{$profile_name}/resume">Resume</a>
                 </div>
             </div>
         </div>
