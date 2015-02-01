@@ -44,8 +44,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Profileeditor extends CI_Controller {
 
 
-    public function index()
+    public function index($id)
     {
+        if($this->isPostRequest()){
+            //save data to the database
+
+            //inform user save was successful
+            $this->smarty->assign("notification", "Your settings have been saved successfuly");
+            $this->loadPage($id);
+        }else{
+            $this->loadPage($id);
+        }
+
+    }
+
+    private function isPostRequest(){
+        return $_SERVER['REQUEST_METHOD'] == "POST";
+    }
+
+    private function loadPage($id){
         // Story & About
         $this->smarty->assign("title", "Ben Soer");
         $this->smarty->assign("username", "bensoer");

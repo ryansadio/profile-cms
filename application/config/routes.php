@@ -94,6 +94,9 @@ $route['profile/(:any)'] = 'home/profile/$1';
 $route['profile/(:any)/projects'] = 'home/projects/$1';
 $route['profile/(:any)/resume'] = 'home/resume/$1';
 
+// profileeditor page rerouting
+$route['profileeditor/(:any)'] = 'profileeditor/index/$1';
+
 
 
 /* End of file routes.php */

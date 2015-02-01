@@ -1,5 +1,6 @@
 {include file="_main_header.tpl"}
 <form>
+    <p>{$notification|default:""}</p>
     <ul class="collapsible" data-collapsible="accordion">
         {* STORY AND ABOUT *}
         <li>
@@ -136,13 +137,13 @@
 
     <div class="row">
         <div class="col s2">
-            <button class="btn waves-effect waves-light  left" type="submit" name="action">Save
+            <button class="btn waves-effect waves-light  left" type="submit" name="action" formaction="/profileeditor/{$username}" formmethod="POST">Save
                 <i class="mdi-content-send right"></i>
             </button>
         </div>
         <div class="col s6"><span>&nbsp;</span></div>
         <div class="col s4">
-            <button class="btn waves-effect waves-light grey right" type="submit" name="action">See public profile
+            <button class="btn waves-effect waves-light grey right" type="submit" name="action" formaction="/profile/{$username}" formmethod="POST">See public profile
                 <i class="mdi-social-public right"></i>
             </button>
         </div>

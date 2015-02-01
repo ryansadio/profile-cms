@@ -65,7 +65,9 @@ class Welcome extends CI_Controller {
 
 			//hardcoded for now, will call back to database to check
 			if($email == "ikben@shaw.ca" && $password == "password"){
-				$this->goToProfileEditor();
+				//$this->goToProfileEditor();
+				$this->load->helper('url');
+				redirect('profileeditor/bensoer');
 			}else{
 				// return back to the main page. Going to need to return errors here aswell
 				$this->smarty->assign("title", "Welcome");
@@ -81,20 +83,6 @@ class Welcome extends CI_Controller {
 
 	private function isPostRequest(){
 		return $_SERVER['REQUEST_METHOD'] == "POST";
-	}
-
-	private function goToProfileEditor(){
-		// Header items
-		$this->smarty->assign("title", "Ben Soer");
-		$this->smarty->assign("image", "../../assets/images/me.jpg");
-		$this->smarty->assign("name", "Ben Soer");
-		$this->smarty->assign("job", "Web Developer");
-		$this->smarty->assign("email", "bsoer@bensoer.com");
-		$this->smarty->assign("base_colour", "midnight_blue");
-		$this->smarty->assign("accent_colour", "alizarin");
-
-		// Render page
-		$this->smarty->display("profileeditor.tpl");
 	}
 }
 
