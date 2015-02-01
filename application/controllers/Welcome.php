@@ -63,11 +63,11 @@ class Welcome extends CI_Controller {
 			$email = $this->input->post('email', true);
 			$password = $this->input->post('password', true);
 
-			//hardcoded for now, will call back to database to check
-			if($email == "ikben@shaw.ca" && $password == "password"){
+			$creds = $this->user->getCredentials($email);
+			if((!empty($creds)) && $password == $creds["password"]){
 				//$this->goToProfileEditor();
 				$this->load->helper('url');
-				redirect('profileeditor/bensoer');
+				redirect('profileeditor/' . $creds["username"]);
 			}else{
 				// return back to the main page. Going to need to return errors here aswell
 				$this->smarty->assign("title", "Welcome");

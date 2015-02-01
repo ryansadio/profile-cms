@@ -50,11 +50,20 @@ class Signup extends CI_Controller {
             $password = $this->input->post('password');
 
             //save user credentials to the database
+            $result = $this->user->createUser($info=array("email"=>$email, "name" => $fullName, "password" => $password));
 
-            //load the page telling user they were successfuly created
-            $this->smarty->assign("title", "Signup");
-            $this->smarty->assign("notification", "Your account was successfuly created. Please login <br>");
-            $this->smarty->display("signup.tpl");
+            if($result){
+                //load the page telling user they were successfuly created
+                $this->smarty->assign("title", "Signup");
+                $this->smarty->assign("notification", "Your account was successfuly created. Please login <br>");
+                $this->smarty->display("signup.tpl");
+            }else{
+                //load the page telling user there was an error
+                $this->smarty->assign("title", "Signup");
+                $this->smarty->assign("notification", "There was an error in creating your account, please try again<br>");
+                $this->smarty->display("signup.tpl");
+            }
+
 
 
 

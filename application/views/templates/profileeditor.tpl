@@ -21,47 +21,47 @@
                         {* Username *}
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="username" type="text" class="validate" value="{$username}">
+                                <input id="username" type="text" class="validate" name="username" value="{$username}">
                                 <label for="username">Username</label>
                             </div>
                         </div>
                         {* Full name *}
                         <div class="row">
                             <div class="input-field col s6">
-                                <input id="name" type="text" class="validate" value="{$name}">
+                                <input id="name" type="text" class="validate" name="name" value="{$name}">
                                 <label for="name">Full Name</label>
                             </div>
                         </div>
                         {* Job *}
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="job" type="text" class="validate" value="{$job}">
+                                <input id="job" type="text" class="validate" name="job" value="{$job}">
                                 <label for="job">Job</label>
                             </div>
                         </div>
                         {* Email *}
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="email" type="text" class="validate" value="{$email}">
+                                <input id="email" type="text" class="validate" name="email" value="{$email}">
                                 <label for="email">Email</label>
                             </div>
                         </div>
                         {* Links *}
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="linkedin" type="text" class="validate" value="{$linkedin}">
+                                <input id="linkedin" type="text" class="validate" name="linkedin" value="{$linkedin}">
                                 <label for="linkedin">Linkedin</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="github" type="text" class="validate" value="{$github}">
+                                <input id="github" type="text" class="validate" name="github" value="{$github}">
                                 <label for="github">Github</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="twitter" type="text" class="validate" value="{$twitter}">
+                                <input id="twitter" type="text" class="validate" name="twitter" value="{$twitter}">
                                 <label for="twitter">Twitter</label>
                             </div>
                         </div>

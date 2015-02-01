@@ -60,13 +60,14 @@ class Home extends CI_Controller {
 
     public function profile($profileName)
     {
+        $profile = $this->user->getProfile($profileName);
         // Header items
-        $this->smarty->assign("title", "Ben Soer");
+        $this->smarty->assign("title", $profile["name"]);
         $this->smarty->assign("profile_name", $profileName); // entered name is then assigned to links that lead to its own page
         $this->smarty->assign("image", "../../assets/images/me.jpg");
-        $this->smarty->assign("name", "Ben Soer");
+        $this->smarty->assign("name", $profile["name"]);
         $this->smarty->assign("job", "Web Developer");
-        $this->smarty->assign("email", "bsoer@bensoer.com");
+        $this->smarty->assign("email", $profile["email"]);
         $this->smarty->assign("base_colour", "midnight_blue");
         $this->smarty->assign("accent_colour", "alizarin");
 
@@ -76,13 +77,14 @@ class Home extends CI_Controller {
 
     public function resume($profileName)
     {
+        $profile = $this->user->getProfile($profileName);
         // Header items
-        $this->smarty->assign("title", "Ben Soer");
+        $this->smarty->assign("title", $profile["name"]);
         $this->smarty->assign("profile_name", $profileName); // entered name is then assigned to links that lead to its own page
         $this->smarty->assign("image", "../../assets/images/me.jpg");
-        $this->smarty->assign("name", "Ben Soer");
+        $this->smarty->assign("name", $profile["name"]);
         $this->smarty->assign("job", "Web Developer");
-        $this->smarty->assign("email", "bsoer@bensoer.com");
+        $this->smarty->assign("email", $profile["email"]);
         $this->smarty->assign("base_colour", "midnight_blue");
         $this->smarty->assign("accent_colour", "alizarin");
 
@@ -95,13 +97,14 @@ class Home extends CI_Controller {
 
     public function projects($profileName)
     {
+        $profile = $this->user->getProfile($profileName);
         // Header items
-        $this->smarty->assign("title", "Ben Soer");
+        $this->smarty->assign("title", $profile["name"]);
         $this->smarty->assign("profile_name", $profileName); // entered name is then assigned to links that lead to its own page
         $this->smarty->assign("image", "../../assets/images/me.jpg");
-        $this->smarty->assign("name", "Ben Soer");
+        $this->smarty->assign("name", $profile["name"]);
         $this->smarty->assign("job", "Web Developer");
-        $this->smarty->assign("email", "bsoer@bensoer.com");
+        $this->smarty->assign("email", $profile["email"]);
         $this->smarty->assign("base_colour", "midnight_blue");
         $this->smarty->assign("accent_colour", "alizarin");
 
