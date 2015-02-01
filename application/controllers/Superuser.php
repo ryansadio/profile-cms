@@ -38,9 +38,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Class Welcome - controls the main page of the website. This is the "Home" for the profile-cms website
+ * Class Superuser - this controller displays statistical information about the accounts on the website. Management of
+ * accounts will be executed through this controller
  */
-class Welcome extends CI_Controller {
+class Superuser extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -59,30 +60,8 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		if($this->isPostRequest()){
-			$email = $this->input->post('email', true);
-			$password = $this->input->post('password', true);
-
-			//hardcoded for now, will call back to database to check
-			if($email == "ikben@shaw.ca" && $password == "password"){
-				//$this->goToProfileEditor();
-				$this->load->helper('url');
-				redirect('profileeditor/bensoer');
-			}else{
-				// return back to the main page. Going to need to return errors here aswell
-				$this->smarty->assign("title", "Welcome");
-				$this->smarty->display("welcome.tpl");
-			}
-
-		}else{
-			$this->smarty->assign("title", "Welcome");
-			$this->smarty->display("welcome.tpl");
-		}
-
-	}
-
-	private function isPostRequest(){
-		return $_SERVER['REQUEST_METHOD'] == "POST";
+		$this->smarty->assign("title", "Superuser");
+		$this->smarty->display("superuser.tpl");
 	}
 }
 

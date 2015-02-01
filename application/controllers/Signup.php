@@ -38,52 +38,35 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Class Welcome - controls the main page of the website. This is the "Home" for the profile-cms website
+ * Class Signup - deals with creation of accounts and any errors that may occur on the Signup page
  */
-class Welcome extends CI_Controller {
+class Signup extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
-	public function index()
-	{
-		if($this->isPostRequest()){
-			$email = $this->input->post('email', true);
-			$password = $this->input->post('password', true);
+    public function index()
+    {
+        if($this->isPostRequest()){
+            $email = $this->input->post('email');
+            $fullName = $this->input->post('full_name');
+            $password = $this->input->post('password');
 
-			//hardcoded for now, will call back to database to check
-			if($email == "ikben@shaw.ca" && $password == "password"){
-				//$this->goToProfileEditor();
-				$this->load->helper('url');
-				redirect('profileeditor/bensoer');
-			}else{
-				// return back to the main page. Going to need to return errors here aswell
-				$this->smarty->assign("title", "Welcome");
-				$this->smarty->display("welcome.tpl");
-			}
+            //save user credentials to the database
 
-		}else{
-			$this->smarty->assign("title", "Welcome");
-			$this->smarty->display("welcome.tpl");
-		}
+            //load the page telling user they were successfuly created
+            $this->smarty->assign("title", "Signup");
+            $this->smarty->assign("notification", "Your account was successfuly created. Please login <br>");
+            $this->smarty->display("signup.tpl");
 
-	}
 
-	private function isPostRequest(){
-		return $_SERVER['REQUEST_METHOD'] == "POST";
-	}
+
+        }else{
+            $this->smarty->assign("title", "Signup");
+            $this->smarty->display("signup.tpl");
+        }
+    }
+
+    private function isPostRequest(){
+        return $_SERVER['REQUEST_METHOD'] == "POST";
+    }
 }
 
 /* End of file welcome.php */

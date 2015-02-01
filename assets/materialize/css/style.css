@@ -5,6 +5,10 @@
  */
 
 /* Custom colours */
+.story {
+  background-color: #e46f61;
+}
+
 .alizarin {
   background-color: #e74c3c !important; }
 
@@ -65,3 +69,13 @@ footer.page-footer {
     color: rgba(255, 255, 255, 0.8);
     background-color: transparent;
     text-align: center }
+
+
+/* Edit profile page */
+.collapsible {
+  border-color: #e46f61;
+}
+
+.padded {
+  padding: 30px;
+}
