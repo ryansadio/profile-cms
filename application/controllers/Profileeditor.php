@@ -48,6 +48,18 @@ class Profileeditor extends CI_Controller {
     {
         if($this->isPostRequest()){
             //save data to the database
+            $profileData = array("username" => $this->input->post('username'),
+                                    "name" => $this->input->post('name'),
+                                    "job" => $this->input->post("job"),
+                                    "email" => $this->input->post("email"),
+                                    "linkedin" => $this->input->post("linkedin"),
+                                    "twitter" => $this->input->post("twitter"),
+                                    "github" => $this->input->post("github"),
+                                );
+
+
+            $this->profile->saveProfile($profileData);
+
 
             //inform user save was successful
             $this->smarty->assign("notification", "Your settings have been saved successfuly");
@@ -62,19 +74,22 @@ class Profileeditor extends CI_Controller {
         return $_SERVER['REQUEST_METHOD'] == "POST";
     }
 
-    private function loadPage($id){
+    private function loadPage($username){
+
+        $profile = $this->profile->getProfile($username);
+
         // Story & About
-        $this->smarty->assign("title", "Ben Soer");
-        $this->smarty->assign("username", "bensoer");
-        $this->smarty->assign("name", "Ben Soer");
+        $this->smarty->assign("title", $profile["name"]);
+        $this->smarty->assign("username", $profile["username"]);
+        $this->smarty->assign("name", $profile["name"]);
         $this->smarty->assign("image", "../../assets/images/me.jpg");
         $this->smarty->assign("job", "Web Developer");
-        $this->smarty->assign("email", "bsoer@bensoer.com");
+        $this->smarty->assign("email", $profile["email"]);
         $this->smarty->assign("base_colour", "midnight_blue");
         $this->smarty->assign("accent_colour_text", "alizarin-text");
-        $this->smarty->assign("linkedin", "http://linkedin.com/bensoer");
-        $this->smarty->assign("github", "http://github.com/bensoer");
-        $this->smarty->assign("twitter", "http://twitter.com/bensoer");
+        $this->smarty->assign("linkedin", $profile["linkedin"]);
+        $this->smarty->assign("github", $profile["github"]);
+        $this->smarty->assign("twitter", $profile["twitter"]);
 
         // Project(s); Pass an array for the projects???
         $this->smarty->assign("p1_image", "http://placehold.it/350x250");
