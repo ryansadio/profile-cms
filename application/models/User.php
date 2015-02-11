@@ -21,7 +21,7 @@ class User extends CI_Model{
         return $creds;
     }
 
-    // TODO fully implement this function appropriatly
+    // TODO fully implement this function appropriatly.
     function getProfile($username){
         return $this->credentials['ikben@shaw.ca'];
     }
