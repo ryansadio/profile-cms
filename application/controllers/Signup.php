@@ -50,7 +50,7 @@ class Signup extends CI_Controller {
             $password = $this->input->post('password');
 
             //save user credentials to the database
-            $result = $this->user->createUser($info=array("email"=>$email, "name" => $fullName, "password" => $password));
+            $result = $this->user->createUser($info=array("email"=>$email, "username" => $fullName, "password" => $password));
 
             if($result){
                 //load the page telling user they were successfuly created
