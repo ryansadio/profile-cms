@@ -55,8 +55,8 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="github" type="text" class="validate" name="github" value="{$github}">
-                                <label for="github">Github</label>
+                                <input id="googleplus" type="text" class="validate" name="googleplus" value="{$googleplus}">
+                                <label for="googleplus">Google+</label>
                             </div>
                         </div>
                         <div class="row">
@@ -81,7 +81,7 @@
                         <img src="{$p1_image}" height="250px">
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="project_image" type="file" class="validate"">
+                                <input id="project_image" type="file" class="validate">
                             </div>
                         </div>
                     </div>
@@ -111,7 +111,7 @@
                         {* Github link *}
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="project_github" type="text" class="validate" value="{$github}">
+                                <input id="project_github" type="text" class="validate" value="{$github|default:'filler'}">
                                 <label for="project_github">Github</label>
                             </div>
                         </div>
@@ -128,7 +128,7 @@
             <div class="collapsible-body white padded">
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="resume" type="file" class="validate"">
+                        <input id="resume" type="file" class="validate">
                     </div>
                 </div>
             </div>

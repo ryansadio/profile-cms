@@ -79,17 +79,17 @@ class Profileeditor extends CI_Controller {
         $profile = $this->profile->getProfile($username);
 
         // Story & About
-        $this->smarty->assign("title", $profile["name"]);
+        $this->smarty->assign("title", $profile["firstname"] . " " . $profile["lastname"]);
         $this->smarty->assign("username", $profile["username"]);
-        $this->smarty->assign("name", $profile["name"]);
-        $this->smarty->assign("image", "../../assets/images/me.jpg");
-        $this->smarty->assign("job", "Web Developer");
+        $this->smarty->assign("name", $profile["firstname"] . " " . $profile["lastname"]);
+        $this->smarty->assign("image", $profile["userpicture"] == null ? "" : $profile["userpicture"]);
+        $this->smarty->assign("job", $profile["jobtitle"]);
         $this->smarty->assign("email", $profile["email"]);
         $this->smarty->assign("base_colour", "midnight_blue");
         $this->smarty->assign("accent_colour_text", "alizarin-text");
-        $this->smarty->assign("linkedin", $profile["linkedin"]);
-        $this->smarty->assign("github", $profile["github"]);
-        $this->smarty->assign("twitter", $profile["twitter"]);
+        $this->smarty->assign("linkedin", $profile["urllinkedin"]);
+        $this->smarty->assign("googleplus", $profile["urlgoogleplus"]);
+        $this->smarty->assign("twitter", $profile["urltwitter"]);
 
         // Project(s); Pass an array for the projects???
         $this->smarty->assign("p1_image", "http://placehold.it/350x250");
