@@ -7,11 +7,11 @@
 })(jQuery); // end of jQuery name space
 
 // Keep one tab expanded while editing profile
-$('li div.collapsible-header').on('click',function(e){
+/*$('li div.collapsible-header').on('click',function(e){
   if($(this).parents('li').hasClass('active')){
     e.stopPropagation();
   }
-});
+});*/
 
 // Expand "Home" upon loading Edit page
 $("document").ready(function() {
@@ -20,6 +20,7 @@ $("document").ready(function() {
   },10);
 });
 
+// Sign-up form: Auto generate username based on first name and llast name inputs
 $('#last_name').on('blur',function(e) {
     if( document.getElementById('username').value==''
         && document.getElementById('first_name').value!=''
