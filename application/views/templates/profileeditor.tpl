@@ -46,6 +46,52 @@
                                 <label for="email">Email</label>
                             </div>
                         </div>
+                        {* Three descriptions about me *}
+                        {* Title 1 *}
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="tab1_title" type="text" class="validate" value="{$t1_title}">
+                                <label for="tab1_title">Tab 1: Title</label>
+                            </div>
+                        </div>
+                        {* Description 1 *}
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="tab1_description"
+                                          class="materialize-textarea validate">{$t1_description}</textarea>
+                                <label for="tab1_description">Tab 1: Description</label>
+                            </div>
+                        </div>
+                        {* Title 2 *}
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="tab2_title" type="text" class="validate" value="{$t2_title}">
+                                <label for="tab2_title">Tab 2: Title</label>
+                            </div>
+                        </div>
+                        {* Description 2*}
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="tab2_description"
+                                          class="materialize-textarea validate">{$t2_description}</textarea>
+                                <label for="tab2_description">Tab 2: Description</label>
+                            </div>
+                        </div>
+                        {* Title 3 *}
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="tab3_title" type="text" class="validate" value="{$t3_title}">
+                                <label for="tab3_title">Tab 3: Title</label>
+                            </div>
+                        </div>
+                        {* Description 3*}
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="tab3_description"
+                                          class="materialize-textarea validate">{$t3_description}</textarea>
+                                <label for="tab3_description">Tab 3: Description</label>
+                            </div>
+                        </div>
                         {* Links *}
                         <div class="row">
                             <div class="input-field col s12">
@@ -55,14 +101,14 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="googleplus" type="text" class="validate" name="googleplus" value="{$googleplus}">
-                                <label for="googleplus">Google+</label>
+                                <input id="twitter" type="text" class="validate" name="twitter" value="{$twitter}">
+                                <label for="twitter">Twitter</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="twitter" type="text" class="validate" name="twitter" value="{$twitter}">
-                                <label for="twitter">Twitter</label>
+                                <input id="github" type="text" class="validate" name="github" value="{$github}">
+                                <label for="github">GitHub</label>
                             </div>
                         </div>
                     </div>
