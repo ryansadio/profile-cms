@@ -121,48 +121,60 @@
                 <span class="white-text">Projects</div>
             <div class="padded collapsible-body white">
                 {* for-loop here (might be an issue with input id being unique)*}
-                <div class="row" style="border-bottom: solid 1px grey">
-                    <div class="col s5">
-                        {* Image *}
-                        <img src="{$p1_image}" height="250px">
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <input id="project_image" type="file" class="validate">
+                {foreach $projects as $project}
+                    <div class="row" style="border-bottom: solid 1px grey">
+                        <div class="col s5">
+                            {* Image *}
+                            <img src="{$project.image}" height="250px">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="project_image" type="file" class="validate">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col s4">
-                        {* Title *}
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <input id="project_title" type="text" class="validate" value="{$p1_title}">
-                                <label for="project_title">Title</label>
+                        <div class="col s4">
+                            {* Title *}
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="project_title" type="text" class="validate" value="{$project.title}">
+                                    <label for="project_title">Title</label>
+                                </div>
                             </div>
-                        </div>
-                        {* Description *}
-                        <div class="row">
-                            <div class="input-field col s12">
+                            {* Description *}
+                            <div class="row">
+                                <div class="input-field col s12">
                                 <textarea id="project_description"
-                                          class="materialize-textarea validate">{$p1_description}</textarea>
-                                <label for="project_description">Description</label>
+                                          class="materialize-textarea validate">{$project.description}</textarea>
+                                    <label for="project_description">Description</label>
+                                </div>
                             </div>
-                        </div>
-                        {* Link *}
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <input id="project_link" type="text" class="validate" value="{$p1_link}">
-                                <label for="project_link">Link</label>
+                            {foreach $project.links as $link}
+                                <div class=""row">
+                                    <div class=""input-field col s12">
+                                        <input id="project_{$link.linkname}" type="text" class="validate" value="{$link.linkurl}">
+                                        <label for="project_{$link.linkname}">{$link.linkname}</label>
+                                    </div>
+                                </div>
+                            {/foreach}
+
+                            {* Link *}
+                            {*<div class="row">
+                                <div class="input-field col s12">
+                                    <input id="project_link" type="text" class="validate" value="{$project.link}">
+                                    <label for="project_link">Link</label>
+                                </div>
                             </div>
-                        </div>
-                        {* Github link *}
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <input id="project_github" type="text" class="validate" value="{$github|default:'filler'}">
-                                <label for="project_github">Github</label>
-                            </div>
+                            {* Github link *}{*
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="project_github" type="text" class="validate" value="{$github|default:'filler'}">
+                                    <label for="project_github">Github</label>
+                                </div>
+                            </div>*}
                         </div>
                     </div>
-                </div>
+                {/foreach}
+
                 {* Add button will add another form for new projects*}
                 <a class="btn-floating btn-large waves-effect waves-light red right"><i class="mdi-content-add"></i></a>
             </div>

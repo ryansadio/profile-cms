@@ -45,4 +45,25 @@ class Profile extends CI_Model{
             "github" => "http://github.com/bensoer",
         );*/
     }
+
+    function getProjects($userid){
+        $this->db->where('userid', $userid);
+        $queryArray = $this->db->get('projects')->result_array();
+        if(empty($queryArray)){
+            return array();
+        }else{
+            return $queryArray;
+        }
+
+    }
+
+    function getPRojectLinks($projectid){
+        $this->db->where('projectid', $projectid);
+        $queryArray = $this->db->get('links')->result_array();
+        if(empty($queryArray)){
+            return array();
+        }else{
+            return $queryArray;
+        }
+    }
 }

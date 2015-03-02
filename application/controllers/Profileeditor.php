@@ -88,15 +88,60 @@ class Profileeditor extends CI_Controller {
         $this->smarty->assign("base_colour", "midnight_blue");
         $this->smarty->assign("accent_colour_text", "alizarin-text");
         $this->smarty->assign("linkedin", $profile["urllinkedin"]);
-        $this->smarty->assign("googleplus", $profile["urlgoogleplus"]);
+        $this->smarty->assign("github", $profile["urlgithub"]);
         $this->smarty->assign("twitter", $profile["urltwitter"]);
 
+        $this->smarty->assign("t1_title", "T1");
+        $this->smarty->assign("t1_description", $profile["userdescription1"]);
+        $this->smarty->assign("t2_title", "T2");
+        $this->smarty->assign("t2_description", $profile["userdescription2"]);
+        $this->smarty->assign("t3_title", "T3");
+        $this->smarty->assign("t3_description", $profile["userdescription3"]);
+
+
+        $projects = $this->profile->getProjects($profile["userid"]);
+
+        $allProjects = array();
+
+        for($i = 0; $i < count($projects); $i++){
+            $aProject = array();
+            $aProject["image"] = $projects[$i]["projectpicture"];
+            $aProject["title"] = $projects[$i]["projectname"];
+            $aProject["description"] = $projects[$i]["projectdescription"];
+            //$this->smarty->assign("p" . ($i+1) . "_image", $projects[$i]["projectpicture"]); // p1_image, p2_image, ...
+            //$this->smarty->assign("p" . ($i+1) . "_title", $projects[$i]["projectname"]); // p1_title, p2_title, ...
+            //$this->smarty->assign("p" . ($i+1) . "_description", $projects[$i]["projectname"]);
+
+            //get all links belonging with this project
+            $links = $this->profile->getProjectLinks($projects[$i]["projectid"]);
+
+            $allLinks = array();
+            foreach($links as $link){
+                // p<number>_<linkname>
+                //$this->smarty->assign("p" . ($i+1) . "_" . $link["linkname"], $link["linkurl"]);
+                $aLink = array();
+                $aLink["linkname"] = $link["linkname"];
+                $aLink["linkurl"] = $link["linkurl"];
+                //$aProject[$link["linkname"]] = $link["linkurl"];
+
+                $allLinks[] = $aLink;
+
+            }
+
+            $aProject["links"] = $allLinks;
+
+            $allProjects[] = $aProject;
+
+        }
+
+        $this->smarty->assign("projects", $allProjects);
+
         // Project(s); Pass an array for the projects???
-        $this->smarty->assign("p1_image", "http://placehold.it/350x250");
+        /*$this->smarty->assign("p1_image", "http://placehold.it/350x250");
         $this->smarty->assign("p1_title", "Codefire");
         $this->smarty->assign("p1_description", "Insert description here.");
         $this->smarty->assign("p1_link", "http://codefire.io/");
-        $this->smarty->assign("p1_github", "http://github.com/codefire");
+        $this->smarty->assign("p1_github", "http://github.com/codefire");*/
 
         // Resume
         $this->smarty->assign("url", "../../assets/pdfs/Untitled.pdf");
