@@ -46,7 +46,7 @@ class User extends CI_Model{
             return false;
         }else{
             //$credentials[$info["email"]] = array("password" => $info["password"], "name" => $info["name"], "email" => $info["email"]);
-
+            $this->db->insert('users', $info);
             return true;
         }
     }
