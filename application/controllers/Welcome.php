@@ -68,6 +68,8 @@ class Welcome extends CI_Controller {
 				//$this->goToProfileEditor();
 				$this->load->helper('url');
 				if($creds["securityrole"] == "admin"){
+					$this->load->helper('cookie');
+					set_cookie('isAdmin', 'yes', 30*60);
 					redirect('superuser');
 				}else{
 					redirect('profileeditor/' . $creds["username"]);
