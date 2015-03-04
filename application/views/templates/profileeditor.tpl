@@ -176,7 +176,34 @@
                 {/foreach}
 
                 {* Add button will add another form for new projects*}
-                <a class="btn-floating btn-large waves-effect waves-light red right"><i class="mdi-content-add"></i></a>
+                <a class="btn-floating btn-large waves-effect waves-light red right"
+                   onclick="document.getElementById('newprojectdiv').style.display = 'block'"><i class="mdi-content-add"></i></a>
+                <div id="newprojectdiv" class="row" style="display:none">
+                    <div class="offset-s6 col s6" id="addProject">
+                        <form id="newProject">
+                            <div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="newprojectname" type="text" class="validate" name="newprojectname">
+                                        <label for="newprojectname">Project Name</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <textarea id="newprojectdescription" type="text" class="materialize-textarea" name="newprojectdescription"></textarea>
+                                        <label for="newprojectdescription">Project Description</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <button class="btn waves-effect waves-light" type="submit" name="action" formaction="/profileeditor/{$username}/addproject">Add
+                                        <i class="mdi-content-send right"></i>
+                                    </button>
+                                    <button class="btn waves-effect waves-light" type="reset">Reset</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </li>
         {* RESUME *}
