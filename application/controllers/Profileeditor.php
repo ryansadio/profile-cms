@@ -47,6 +47,10 @@ class Profileeditor extends CI_Controller {
     public function index($id)
     {
         if($this->isPostRequest()){
+
+            //upload image to the assets folder
+
+
             //save data to the database
             $profileData = array("username" => $this->input->post('username'),
                                     "name" => $this->input->post('name'),
@@ -56,6 +60,8 @@ class Profileeditor extends CI_Controller {
                                     "twitter" => $this->input->post("twitter"),
                                     "github" => $this->input->post("github"),
                                 );
+
+
 
 
             $this->profile->saveProfile($profileData);
