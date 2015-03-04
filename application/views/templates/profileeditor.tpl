@@ -1,5 +1,5 @@
 {include file="_main_header.tpl"}
-<form>
+<form enctype="multipart/form-data">
     <p>{$notification|default:""}</p>
     <ul class="collapsible" data-collapsible="accordion">
         {* STORY AND ABOUT *}
@@ -13,8 +13,9 @@
                         <img src="{$image}" alt="" class="circle responsive-img">
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="photo" type="file" class="validate"">
+                                <input id="photo" name="photo" type="file" class="validate">
                             </div>
+
                         </div>
                     </div>
                     <div class="col s4">
@@ -213,7 +214,7 @@
             <div class="collapsible-body white padded">
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="resume" type="file" class="validate">
+                        <input id="resume" name="resume" type="file" class="validate">
                     </div>
                 </div>
             </div>

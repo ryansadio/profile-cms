@@ -50,6 +50,29 @@ class Profileeditor extends CI_Controller {
 
             //upload image to the assets folder
 
+            //if no directory made for user, create one
+            if(!is_dir("uploads/" . $id)){
+                mkdir("uploads/" . $id);
+            }
+
+            //configure uploader
+            $config['upload_path'] = './uploads/' . $id . '/';
+            $config['allowed_types'] = 'gif|jpg|png|pdf';
+            $config['max_size']     = '200';
+            $config['max_width'] = '1024';
+            $config['max_height'] = '768';
+
+            //configure for image upload
+            $config["file_name"] = "profile_" . $id;
+            $this->load->library("upload", $config);
+
+            $this->upload->do_upload("photo");
+
+            //configure for resume upload
+            $config["file_name"] = "resume_" . $id;
+            $this->upload->initialize($config);
+            $this->upload->do_upload("resume");
+
 
             //save data to the database
             $profileData = array("username" => $this->input->post('username'),
@@ -64,7 +87,7 @@ class Profileeditor extends CI_Controller {
 
 
 
-            $this->profile->saveProfile($profileData);
+            //$this->profile->saveProfile($profileData);
 
 
             //inform user save was successful
@@ -78,6 +101,16 @@ class Profileeditor extends CI_Controller {
 
     private function isPostRequest(){
         return $_SERVER['REQUEST_METHOD'] == "POST";
+    }
+
+    public function addProject($id){
+
+        //save to database the new project
+        //newprojectname
+        //newprojectdescription
+
+        $this->loadPage($id);
+
     }
 
     private function loadPage($username){
