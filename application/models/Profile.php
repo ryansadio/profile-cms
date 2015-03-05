@@ -12,21 +12,35 @@ class Profile extends CI_Model{
         parent::__construct();
     }
 
-    // TODO implement saving to database
-    function saveProfile($profileInfo){
+    function saveProfile($userid, $profileInfo){
+        $this->db->where('username', $userid);
         $this->db->update('users', $profileInfo);
     }
 
-    function saveProjects($projectInfo){
+    //save projects via updating them. Pass where condition and then what info to update
+    function saveProject($whereArray, $projectInfo){
+        $this->db->where($whereArray);
         $this->db->update('projects', $projectInfo);
 
     }
 
-    function saveLinks($linkInfo){
+    function addNewProject($userid, $projectName, $projectDescription){
+        $data = array(
+            "userid" => $userid,
+            "projectname" => $projectName,
+            "projectdescription" => $projectDescription,
+            "projectpicture" => "/assets/images/new_project_default.png"
+        );
+
+        $this->db->insert('projects', $data);
+    }
+
+    //save links via updating them. Pass where condition and then what info to update
+    function saveProjectLinks($whereArray, $linkInfo){
+        $this->db->where($whereArray);
         $this->db->update('links', $linkInfo);
     }
 
-    // TODO implement with database
     function getProfile($username){
         $this->db->where('username', $username);
         $queryArray = $this->db->get('users')->result_array();
@@ -57,7 +71,7 @@ class Profile extends CI_Model{
 
     }
 
-    function getPRojectLinks($projectid){
+    function getProjectLinks($projectid){
         $this->db->where('projectid', $projectid);
         $queryArray = $this->db->get('links')->result_array();
         if(empty($queryArray)){
