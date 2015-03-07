@@ -75,6 +75,9 @@ class Superuser extends CI_Controller {
 		$this->smarty->display("superuser.tpl");
 	}
 
+    /**deletes the user account
+     * @param $username the username of the account being deleted
+     */
 	public function delete($username){
 
 		if($this->user->deleteAccount($username)){

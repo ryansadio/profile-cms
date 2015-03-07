@@ -65,10 +65,11 @@ class Welcome extends CI_Controller {
 
 			$creds = $this->user->getCredentials($email);
 			if((!empty($creds)) && $password == $creds["password"]){
-				//$this->goToProfileEditor();
+                $this->load->helper('cookie');
 				$this->load->helper('url');
+                set_cookie('valid_login', 'yes', 4*60*60);
 				if($creds["securityrole"] == "admin"){
-					$this->load->helper('cookie');
+
 					set_cookie('isAdmin', 'yes', 30*60);
 					redirect('superuser');
 				}else{
