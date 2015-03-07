@@ -48,12 +48,8 @@ class Profileeditor extends CI_Controller {
     {
         if($this->isPostRequest()){
 
-            //upload image to the assets folder
-
-            //if no directory made for user, create one
-            if(!is_dir("uploads/" . $username)){
-                mkdir("uploads/" . $username);
-            }
+            //set the users upload directory if not already made
+            $this->setDirectoryIfNotExists($username);
 
             //configure uploader
             $config['upload_path'] = './uploads/' . $username . '/';
@@ -67,8 +63,8 @@ class Profileeditor extends CI_Controller {
             $config["file_name"] = "profile_" . $username;
             $this->load->library("upload", $config);
 
-            $this->upload->do_upload("photo");
-            //var_dump($this->upload->display_errors('<p>', '</p>'));
+            $error = $this->upload->do_upload("photo");
+            //get profile image's save path for the db
             $fullPath = $this->upload->data('full_path');
             $fileName = substr($fullPath, mb_strrpos($fullPath, "/")+1, strlen($fullPath));
             $profilePhoto = "../../../uploads/" . $username . "/" . $fileName;
@@ -76,17 +72,19 @@ class Profileeditor extends CI_Controller {
             //configure for resume upload
             $config["file_name"] = "resume_" . $username;
             $this->upload->initialize($config);
-            $this->upload->do_upload("resume");
-            //var_dump($this->upload->display_errors('<p>', '</p>'));
+            $error = $this->upload->do_upload("resume");
+            //get resume's save path for the db
             $fullPath = $this->upload->data('full_path');
             $fileName = substr($fullPath, mb_strrpos($fullPath, "/")+1, strlen($fullPath));
             $resumeFile = "../../../uploads/" . $username . "/" . $fileName;
 
+            //parse the first name and last name from the full name input field
             $fullName = $this->input->post('name');
             $spacePos = strpos($fullName, " ");
             $firstName = substr($fullName,0, $spacePos);
             $lastName = substr($fullName, $spacePos+1, strlen($fullName));
 
+            //place all data into associative array of content from the Home section
             $homeData = array(  "username" => $this->input->post('username'),
                                 "firstname" => $firstName,
                                 "lastname" => $lastName,
@@ -107,56 +105,17 @@ class Profileeditor extends CI_Controller {
 
             $this->profile->saveProfile($username, $homeData);
 
-
-
             $user = $this->user->getProfile($username);
             $id = $user["userid"];
 
             //get all known projects
             $projects = $this->profile->getProjects($id);
-
-            foreach($projects as $project){
-
-                //re-upload the project image
-                $config["file_name"] = $project["projectname"] . "_" . $username;
-                $this->upload->initialize($config);
-
-                //try to upload an image. If no image was set this will fail returning FALSE
-                $wasImageSet = $this->upload->do_upload($project["projectname"] . "_image");
-
-                //update the project data with new data or already set data
-                $projectData = array(
-                    "userid" => $id,
-                    "projectname" => $this->input->post($project["projectname"] . "_title"),
-                    "projectpicture" => $wasImageSet ? $this->upload->data('full_path') : $project["projectpicture"], //load in the dir to the project picture
-                    "projectdescription" => $this->input->post($project["projectname"] . "_description")
-
-                );
-
-                //save the changes to the database where userid and projectid match this project and user
-                $this->profile->saveProject(array("userid" => $id, "projectid" => $project["projectid"]),$projectData);
-
-
-                //get all links belonging to project
-                $links = $this->profile->getProjectLinks($project["projectid"]);
-
-                foreach($links as $link){
-
-                    $linkData = array(
-                        "linkname" => $link["linkname"],
-                        "linkurl" => $this->input->post($project["projectname"] . "_" . $link["linkname"] . "_link")
-
-                    );
-
-                    //save the changes to the database where the projectid and linkid match this project and link
-                    $this->profile->saveProjectLinks(array("projectid" => $project["projectid"], "linkid" => $link["linkid"]), $linkData);
-
-                }
-
-            }
+            //update all of the projects
+            $this->updateProjects($projects, $username, $id);
 
             //inform user save was successful
             $this->smarty->assign("notification", "Your settings have been saved successfuly");
+
             $this->loadPage($username);
         }else{
             $this->loadPage($username);
@@ -164,10 +123,68 @@ class Profileeditor extends CI_Controller {
 
     }
 
+    /**
+     * @return bool whether or not this is a post request. True = POST
+     */
     private function isPostRequest(){
         return $_SERVER['REQUEST_METHOD'] == "POST";
     }
 
+    /**Creates the users upload directory if it does not exist already
+     * @param $username the users username that is used in the naming of the upload directory
+     */
+    private function setDirectoryIfNotExists($username){
+        if(!is_dir("uploads/" . $username)){
+            mkdir("uploads/" . $username);
+        }
+    }
+
+    /** Updates all of the known projects in the database with any new data entered or changed by the user
+     * @param $projects the associative array of all known projects
+     * @param $username the username of the user the projects belong to
+     * @param $id the id of the user the projects belong to
+     */
+    private function updateProjects($projects, $username, $id){
+        foreach($projects as $project){
+
+            //re-upload the project image
+            $config["file_name"] = $project["projectname"] . "_" . $username;
+            $this->upload->initialize($config);
+
+            //try to upload an image. If no image was set this will fail returning FALSE
+            $wasImageSet = $this->upload->do_upload($project["projectname"] . "_image");
+
+            //update the project data with new data or already set data
+            $projectData = array(
+                "userid" => $id,
+                "projectname" => $this->input->post($project["projectname"] . "_title"),
+                "projectpicture" => $wasImageSet ? $this->upload->data('full_path') : $project["projectpicture"], //load in the dir to the project picture
+                "projectdescription" => $this->input->post($project["projectname"] . "_description")
+
+            );
+
+            //save the changes to the database where userid and projectid match this project and user
+            $this->profile->saveProject(array("userid" => $id, "projectid" => $project["projectid"]),$projectData);
+
+            //get all links belonging to project
+            $links = $this->profile->getProjectLinks($project["projectid"]);
+
+            foreach($links as $link){
+
+                $linkData = array(
+                    "linkname" => $link["linkname"],
+                    "linkurl" => $this->input->post($project["projectname"] . "_" . $link["linkname"] . "_link")
+                );
+
+                //save the changes to the database where the projectid and linkid match this project and link
+                $this->profile->saveProjectLinks(array("projectid" => $project["projectid"], "linkid" => $link["linkid"]), $linkData);
+            }
+        }
+    }
+
+    /** Adds a project to the database
+     * @param $username the username the project belongs to
+     */
     public function addProject($username){
 
         //save to database the new project
@@ -190,6 +207,11 @@ class Profileeditor extends CI_Controller {
 
     }
 
+    /**loads the page with all of the required content fetched from the database
+     * @param $username the name of the user the page is being loaded for
+     * @param bool $fromProject whether or not the function is being called from the save project function or not. This
+     * implementation may be temporary
+     */
     private function loadPage($username, $fromProject = false){
 
         if($fromProject){
@@ -229,21 +251,15 @@ class Profileeditor extends CI_Controller {
             $aProject["image"] = $projects[$i]["projectpicture"];
             $aProject["title"] = $projects[$i]["projectname"];
             $aProject["description"] = $projects[$i]["projectdescription"];
-            //$this->smarty->assign("p" . ($i+1) . "_image", $projects[$i]["projectpicture"]); // p1_image, p2_image, ...
-            //$this->smarty->assign("p" . ($i+1) . "_title", $projects[$i]["projectname"]); // p1_title, p2_title, ...
-            //$this->smarty->assign("p" . ($i+1) . "_description", $projects[$i]["projectname"]);
 
             //get all links belonging with this project
             $links = $this->profile->getProjectLinks($projects[$i]["projectid"]);
 
             $allLinks = array();
             foreach($links as $link){
-                // p<number>_<linkname>
-                //$this->smarty->assign("p" . ($i+1) . "_" . $link["linkname"], $link["linkurl"]);
                 $aLink = array();
                 $aLink["linkname"] = $link["linkname"];
                 $aLink["linkurl"] = $link["linkurl"];
-                //$aProject[$link["linkname"]] = $link["linkurl"];
 
                 $allLinks[] = $aLink;
 
@@ -256,13 +272,6 @@ class Profileeditor extends CI_Controller {
         }
 
         $this->smarty->assign("projects", $allProjects);
-
-        // Project(s); Pass an array for the projects???
-        /*$this->smarty->assign("p1_image", "http://placehold.it/350x250");
-        $this->smarty->assign("p1_title", "Codefire");
-        $this->smarty->assign("p1_description", "Insert description here.");
-        $this->smarty->assign("p1_link", "http://codefire.io/");
-        $this->smarty->assign("p1_github", "http://github.com/codefire");*/
 
         // Resume
         $this->smarty->assign("url", $profile["resume"]);

@@ -13,10 +13,10 @@ class Authentication extends CI_Controller{
         $this->ci = &get_instance();
         $route = $this->ci->router->fetch_class();
 
+        //if this is not the login or signup page
+        if($route != "welcome" && $route != "signup"){
 
-        if($route != "welcome"){
-
-
+            //users should have a cookie from the signup page saying they are allowed in
 
             $this->load->helper('cookie');
 

@@ -79,6 +79,9 @@ class Signup extends CI_Controller {
         }
     }
 
+    /**determines if the incoming request is from a GET or POST request. True = POST
+     * @return bool the result. True = POST
+     */
     private function isPostRequest(){
         return $_SERVER['REQUEST_METHOD'] == "POST";
     }

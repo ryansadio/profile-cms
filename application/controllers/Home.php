@@ -42,7 +42,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Home extends CI_Controller {
 
-
+    /**loads the profile page of the user's pages
+     * @param $profileName the username of the user
+     */
     public function profile($profileName)
     {
         $profile = $this->user->getProfile($profileName);
@@ -60,6 +62,9 @@ class Home extends CI_Controller {
         $this->smarty->display("home.tpl");
     }
 
+    /**loads the resume page of the user's pages
+     * @param $profileName the username of the user
+     */
     public function resume($profileName)
     {
         $profile = $this->user->getProfile($profileName);
@@ -80,6 +85,9 @@ class Home extends CI_Controller {
         $this->smarty->display("resume.tpl");
     }
 
+    /** load sthe projects page of the user's pages
+     * @param $profileName the username of the user
+     */
     public function projects($profileName)
     {
         $profile = $this->user->getProfile($profileName);
