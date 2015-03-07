@@ -287,7 +287,7 @@ class Profileeditor extends CI_Controller {
 
         $allProjects = array();
 
-        for($i = 0; $i < count($projects); $i++){
+        /*for($i = 0; $i < count($projects); $i++){
             $aProject = array();
             $aProject["image"] = $projects[$i]["projectpicture"];
             $aProject["title"] = $projects[$i]["projectname"];
@@ -309,6 +309,16 @@ class Profileeditor extends CI_Controller {
             $aProject["links"] = $allLinks;
 
             $allProjects[] = $aProject;
+
+        }*/
+
+        foreach($projects as $project){
+
+            $links = $this->link->getProjectLinks($project["projectid"]);
+
+            $project["links"] = $links;
+
+            $allProjects[] = $project;
 
         }
 

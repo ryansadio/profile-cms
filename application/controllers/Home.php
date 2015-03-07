@@ -102,15 +102,10 @@ class Home extends CI_Controller {
         $this->smarty->assign("accent_colour", "alizarin");
 
         $user = $this->user->getProfile($profileName);
-
         $projects = $this->profile->getProjects($user["userid"]);
 
-        //var_dump($projects);
-
         $allProjects = array();
-
         foreach($projects as $project){
-
 
             $links = $this->link->getProjectLinks($project["projectid"]);
 
@@ -119,11 +114,8 @@ class Home extends CI_Controller {
             $allProjects[] = $project;
         }
 
-        //var_dump($allProjects);
-
 
         $this->smarty->assign("projects", $allProjects);
-
 
         //Footer items
         $this->setProfileLinks($profile);
