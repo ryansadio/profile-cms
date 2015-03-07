@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 04, 2015 at 06:40 PM
+-- Generation Time: Mar 07, 2015 at 06:06 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `projects` (
   `projectname` varchar(100) NOT NULL,
   `projectpicture` varchar(200) NOT NULL,
   `projectdescription` varchar(800) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -63,6 +63,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(50) NOT NULL,
   `jobtitle` varchar(100) DEFAULT NULL,
   `resume` varchar(200) DEFAULT NULL,
+  `usertitle1` text,
+  `usertitle2` text,
+  `usertitle3` text,
   `userpicture` varchar(200) DEFAULT NULL,
   `userdescription1` varchar(800) DEFAULT NULL,
   `userdescription2` varchar(800) DEFAULT NULL,
@@ -70,14 +73,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   `urllinkedin` varchar(200) DEFAULT NULL,
   `urltwitter` varchar(200) DEFAULT NULL,
   `urlgithub` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userid`, `username`, `password`, `securityrole`, `firstname`, `lastname`, `email`, `jobtitle`, `resume`, `userpicture`, `userdescription1`, `userdescription2`, `userdescription3`, `urllinkedin`, `urltwitter`, `urlgithub`) VALUES
-(1, 'bensoer', 'password', 'user', 'Ben', 'Soer', 'ben@soernet.ca', 'PHP Developer', NULL, NULL, 'Avid Designer', 'Such Wow', 'I write in depth and on par', 'http://www.linkedin.com', 'http://www.twitter.com', 'http://google.com');
+INSERT INTO `users` (`userid`, `username`, `password`, `securityrole`, `firstname`, `lastname`, `email`, `jobtitle`, `resume`, `usertitle1`, `usertitle2`, `usertitle3`, `userpicture`, `userdescription1`, `userdescription2`, `userdescription3`, `urllinkedin`, `urltwitter`, `urlgithub`) VALUES
+(1, 'bensoer', 'password', 'user', 'Ben', 'Soer', 'ben@soernet.ca', 'PHP Developer / Entrepeneur', '../../../uploads/bensoer/resume_bensoer', 'About Me', 'Sports', 'Skills', '../../../uploads/bensoer/profile_bensoer.jpg', 'I do Stuff', 'Badminton, Biking, Hiking, Camping', 'Computers, PHP, Java, C, C++, ASP, Swift, Android', 'http://www.linkedin.com', 'http://www.twitter.com', 'http://google.com'),
+(2, 'administrator', 'P@$$w0rd', 'admin', 'Michael', 'Adams', 'admin@vw.com', 'Web Admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -114,12 +118,12 @@ MODIFY `linkid` int(50) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-MODIFY `projectid` int(50) NOT NULL AUTO_INCREMENT;
+MODIFY `projectid` int(50) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `userid` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `userid` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --
