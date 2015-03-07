@@ -173,7 +173,7 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 
-$autoload['model'] = array('user', 'profile');
+$autoload['model'] = array('user', 'profile', 'link');
 
 
 /* End of file autoload.php */
