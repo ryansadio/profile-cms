@@ -25,8 +25,10 @@ password: password
  - There are two admin pages. A Site admin page that is accessible using only the admin account. This page allows admin
  users to view accounts currently on the system and delete them if necessary. A user admin page also exists which allows
  standard users to create / update / delete profile information belonging to thier profile page.
-  - Rich text for the project is used when a user adds a project to thier account. Login, scrolldown and select the Projects
-  header to expand the projects. Select the "+" button to display the create new project form
+ - Rich text editing is used throughout the profile editing admin page. Most specifically is when a user adds a project 
+ to thier account. Login, scrolldown and select the Projects header to expand the projects. Select the "+" button to 
+ display the create new project form
+ - Usecases are located in the github Wiki page under "Use Cases" section. [Or Click Here](https://github.com/VoodooWorks/profile-cms/wiki/Use-Cases)
 
 
 # How to use the Smarty Library in CodeIgniter
