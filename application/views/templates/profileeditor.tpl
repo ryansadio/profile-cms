@@ -118,8 +118,8 @@
         </li>
         {* PROJECTS *}
         <li>
-            <div class="collapsible-header story {$active|default:""}"><i class="mdi-maps-local-shipping white-text"></i>
-                <span class="white-text">Projects</div>
+            <div class="collapsible-header {$active|default:""} story "><i class="mdi-maps-local-shipping white-text"></i>
+                <span class="white-text">Projects</span></div>
             <div class="padded collapsible-body white">
                 {* for-loop here (might be an issue with input id being unique)*}
                 {foreach $projects as $project}

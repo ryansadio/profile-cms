@@ -115,8 +115,6 @@ class Profileeditor extends CI_Controller {
             //get all known projects
             $projects = $this->profile->getProjects($id);
 
-            var_dump($projects);
-
             foreach($projects as $project){
 
                 //re-upload the project image
@@ -185,7 +183,10 @@ class Profileeditor extends CI_Controller {
 
         $this->profile->addNewProject($id, $newProjectName, $newProjectDescription);
 
-        $this->loadPage($username, true);
+        //$this->loadPage($username, true);
+
+        $this->load->helper('url');
+        redirect('/profileeditor/' . $username);
 
     }
 
