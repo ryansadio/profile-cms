@@ -55,8 +55,16 @@ class Home extends CI_Controller {
         $this->smarty->assign("name", $profile["firstname"] . " " . $profile["lastname"]);
         $this->smarty->assign("job", $profile["jobtitle"]);
         $this->smarty->assign("email", $profile["email"]);
+        $this->smarty->assign("t1", $profile["usertitle1"]);
+        $this->smarty->assign("d1", $profile["userdescription1"]);
+        $this->smarty->assign("t2", $profile["usertitle2"]);
+        $this->smarty->assign("d2", $profile["userdescription2"]);
+        $this->smarty->assign("t3", $profile["usertitle3"]);
+        $this->smarty->assign("d3", $profile["userdescription3"]);
         $this->smarty->assign("base_colour", "midnight_blue");
         $this->smarty->assign("accent_colour", "alizarin");
+
+        $this->setProfileLinks($profile);
 
         // Render page
         $this->smarty->display("home.tpl");
@@ -78,8 +86,10 @@ class Home extends CI_Controller {
         $this->smarty->assign("base_colour", "midnight_blue");
         $this->smarty->assign("accent_colour", "alizarin");
 
+        $this->setProfileLinks($profile);
+
         // Content
-        $this->smarty->assign("url", "../../assets/pdfs/Untitled.pdf");
+        $this->smarty->assign("url", $profile["resume"]);
 
         // Render page
         $this->smarty->display("resume.tpl");
@@ -101,8 +111,26 @@ class Home extends CI_Controller {
         $this->smarty->assign("base_colour", "midnight_blue");
         $this->smarty->assign("accent_colour", "alizarin");
 
+        $this->setProfileLinks($profile);
+
         // Render page
         $this->smarty->display("project.tpl");
+    }
+
+    /**sets links if they have been filled in by the user to the smarty template
+     * @param $profile the profile information of the user
+     */
+    private function setProfileLinks($profile){
+        if($profile["urllinkedin"] != null || $profile["urllinkedin"] != ""){
+            $this->smarty->assign("urllinkedin", $profile["urllinkedin"]);
+        }
+        if($profile["urltwitter"] != null || $profile["urltwitter"] != ""){
+            $this->smarty->assign("urltwitter", $profile["urltwitter"]);
+        }
+        if($profile["urlgithub"] != null || $profile["urlgithub"] != ""){
+            $this->smarty->assign("urlgithub", $profile["urlgithub"]);
+        }
+
     }
 }
 
