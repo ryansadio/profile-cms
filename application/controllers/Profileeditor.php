@@ -167,7 +167,7 @@ class Profileeditor extends CI_Controller {
             $this->profile->saveProject(array("userid" => $id, "projectid" => $project["projectid"]),$projectData);
 
             //get all links belonging to project
-            $links = $this->profile->getProjectLinks($project["projectid"]);
+            $links = $this->link->getProjectLinks($project["projectid"]);
 
             foreach($links as $link){
 
@@ -177,7 +177,7 @@ class Profileeditor extends CI_Controller {
                 );
 
                 //save the changes to the database where the projectid and linkid match this project and link
-                $this->profile->saveProjectLinks(array("projectid" => $project["projectid"], "linkid" => $link["linkid"]), $linkData);
+                $this->link->saveProjectLinks(array("projectid" => $project["projectid"], "linkid" => $link["linkid"]), $linkData);
             }
         }
     }
@@ -253,7 +253,7 @@ class Profileeditor extends CI_Controller {
             $aProject["description"] = $projects[$i]["projectdescription"];
 
             //get all links belonging with this project
-            $links = $this->profile->getProjectLinks($projects[$i]["projectid"]);
+            $links = $this->link->getProjectLinks($projects[$i]["projectid"]);
 
             $allLinks = array();
             foreach($links as $link){
