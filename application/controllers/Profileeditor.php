@@ -68,6 +68,9 @@ class Profileeditor extends CI_Controller {
                 return;
             }
 
+            $user = $this->user->getProfile($username);
+            $id = $user["userid"];
+
             //configure uploader
             $config['upload_path'] = './uploads/' . $username . '/';
             $config['allowed_types'] = 'gif|jpg|png|pdf';
@@ -80,20 +83,34 @@ class Profileeditor extends CI_Controller {
             $config["file_name"] = "profile_" . $username;
             //$this->load->library('upload', $config);
             $this->upload->initialize($config);
-            $this->upload->do_upload("photo");
+            $success = $this->upload->do_upload("photo");
             //get profile image's save path for the db
-            $fullPath = $this->upload->data('full_path');
-            $fileName = substr($fullPath, mb_strrpos($fullPath, "/")+1, strlen($fullPath));
-            $profilePhoto = "../../../uploads/" . $username . "/" . $fileName;
+
+            $profilePhoto = "";
+            if($success){
+                $fullPath = $this->upload->data('full_path');
+                $fileName = substr($fullPath, mb_strrpos($fullPath, "/")+1, strlen($fullPath));
+                $profilePhoto = "/uploads/" . $username . "/" . $fileName;
+            }else{
+                $profilePhoto = $user["userpicture"];
+            }
+
 
             //configure for resume upload
             $config["file_name"] = "resume_" . $username;
             $this->upload->initialize($config);
             $this->upload->do_upload("resume");
             //get resume's save path for the db
-            $fullPath = $this->upload->data('full_path');
-            $fileName = substr($fullPath, mb_strrpos($fullPath, "/")+1, strlen($fullPath));
-            $resumeFile = "../../../uploads/" . $username . "/" . $fileName;
+            $success = $fullPath = $this->upload->data('full_path');
+
+            $resumeFile = "";
+            if($success){
+                $fileName = substr($fullPath, mb_strrpos($fullPath, "/")+1, strlen($fullPath));
+                $resumeFile = "/uploads/" . $username . "/" . $fileName;
+            }else{
+                $resumeFile = $user["resume"];
+            }
+
 
             //parse the first name and last name from the full name input field
             $fullName = $this->input->post('name');
@@ -122,8 +139,7 @@ class Profileeditor extends CI_Controller {
 
             $this->profile->saveProfile($username, $homeData);
 
-            $user = $this->user->getProfile($username);
-            $id = $user["userid"];
+
 
             //get all known projects
             $projects = $this->profile->getProjects($id);
@@ -227,8 +243,6 @@ class Profileeditor extends CI_Controller {
 
         $this->profile->addNewProject($id, $newProjectName, $newProjectDescription);
 
-        //$this->loadPage($username, true);
-
         $this->load->helper('url');
         redirect('/profileeditor/' . $username);
 
@@ -252,7 +266,7 @@ class Profileeditor extends CI_Controller {
         $this->smarty->assign("title", $profile["firstname"] . " " . $profile["lastname"]);
         $this->smarty->assign("username", $profile["username"]);
         $this->smarty->assign("name", $profile["firstname"] . " " . $profile["lastname"]);
-        $this->smarty->assign("image", $profile["userpicture"] == null ? "" : $profile["userpicture"]);
+        $this->smarty->assign("image", $profile["userpicture"] == null ? "" : "../../.." . $profile["userpicture"]);
         $this->smarty->assign("job", $profile["jobtitle"]);
         $this->smarty->assign("email", $profile["email"]);
         $this->smarty->assign("base_colour", "midnight_blue");
@@ -301,7 +315,7 @@ class Profileeditor extends CI_Controller {
         $this->smarty->assign("projects", $allProjects);
 
         // Resume
-        $this->smarty->assign("url", $profile["resume"]);
+        $this->smarty->assign("url", "../../.." . $profile["resume"]);
 
         // Render page
         $this->smarty->display("profileeditor.tpl");

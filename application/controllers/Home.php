@@ -49,12 +49,9 @@ class Home extends CI_Controller {
     {
         $profile = $this->user->getProfile($profileName);
         // Header items
-        $this->smarty->assign("title", $profile["firstname"] . " " . $profile["lastname"]);
-        $this->smarty->assign("profile_name", $profileName); // entered name is then assigned to links that lead to its own page
-        $this->smarty->assign("image", $profile["userpicture"] == null ? "" : $profile["userpicture"]);
-        $this->smarty->assign("name", $profile["firstname"] . " " . $profile["lastname"]);
-        $this->smarty->assign("job", $profile["jobtitle"]);
-        $this->smarty->assign("email", $profile["email"]);
+        $this->setHeaderInformation($profile);
+
+        // Body items
         $this->smarty->assign("t1", $profile["usertitle1"]);
         $this->smarty->assign("d1", $profile["userdescription1"]);
         $this->smarty->assign("t2", $profile["usertitle2"]);
@@ -77,19 +74,15 @@ class Home extends CI_Controller {
     {
         $profile = $this->user->getProfile($profileName);
         // Header items
-        $this->smarty->assign("title", $profile["firstname"] . " " . $profile["lastname"]);
-        $this->smarty->assign("profile_name", $profileName); // entered name is then assigned to links that lead to its own page
-        $this->smarty->assign("image", $profile["userpicture"] == null ? "" : $profile["userpicture"]);
-        $this->smarty->assign("name", $profile["firstname"] . " " . $profile["lastname"]);
-        $this->smarty->assign("job", $profile["jobtitle"]);
-        $this->smarty->assign("email", $profile["email"]);
+        $this->setHeaderInformation($profile);
+
+        //Body items
         $this->smarty->assign("base_colour", "midnight_blue");
         $this->smarty->assign("accent_colour", "alizarin");
+        $this->smarty->assign("url", $profile["resume"]); // the resume url
 
+        //Footer items
         $this->setProfileLinks($profile);
-
-        // Content
-        $this->smarty->assign("url", $profile["resume"]);
 
         // Render page
         $this->smarty->display("resume.tpl");
@@ -102,12 +95,9 @@ class Home extends CI_Controller {
     {
         $profile = $this->user->getProfile($profileName);
         // Header items
-        $this->smarty->assign("title", $profile["firstname"] . " " . $profile["lastname"]);
-        $this->smarty->assign("profile_name", $profileName); // entered name is then assigned to links that lead to its own page
-        $this->smarty->assign("image", $profile["userpicture"] == null ? "" : $profile["userpicture"]);
-        $this->smarty->assign("name", $profile["firstname"] . " " . $profile["lastname"]);
-        $this->smarty->assign("job", $profile["jobtitle"]);
-        $this->smarty->assign("email", $profile["email"]);
+        $this->setHeaderInformation($profile);
+
+        //Body items
         $this->smarty->assign("base_colour", "midnight_blue");
         $this->smarty->assign("accent_colour", "alizarin");
 
@@ -132,7 +122,17 @@ class Home extends CI_Controller {
         }
 
     }
-}
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/Welcome.php */
+    /**sets the information needed for the header section of the users profile page
+     * @param $profile the profile information of the user
+     */
+    private function setHeaderInformation($profile){
+
+        $this->smarty->assign("title", $profile["firstname"] . " " . $profile["lastname"]);
+        $this->smarty->assign("profile_name", $profile["username"]); // entered name is then assigned to links that lead to its own page
+        $this->smarty->assign("image", $profile["userpicture"] == null ? "" : "../.." . $profile["userpicture"]);
+        $this->smarty->assign("name", $profile["firstname"] . " " . $profile["lastname"]);
+        $this->smarty->assign("job", $profile["jobtitle"]);
+        $this->smarty->assign("email", $profile["email"]);
+    }
+}
