@@ -43,6 +43,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Profileeditor extends CI_Controller {
 
+    public function __construct(){
+        parent::__construct();
+        $this->load->library('upload');
+    }
 
     public function index($username)
     {
@@ -50,6 +54,19 @@ class Profileeditor extends CI_Controller {
 
             //set the users upload directory if not already made
             $this->setDirectoryIfNotExists($username);
+
+            //check mandatory fields if they are valid
+            $email = $this->input->post('email');
+            $name = $this->input->post('name');
+            $nusername = $this->input->post('username');
+
+            $errorMsg = $this->validateNotEmpty(array("Email" => $email, "Full Name" => $name, "Username" => $nusername));
+
+            if(!empty($errorMsg)){
+                $this->smarty->assign("notification", $errorMsg);
+                $this->loadPage($username);
+                return;
+            }
 
             //configure uploader
             $config['upload_path'] = './uploads/' . $username . '/';
@@ -61,9 +78,9 @@ class Profileeditor extends CI_Controller {
 
             //configure for image upload
             $config["file_name"] = "profile_" . $username;
-            $this->load->library("upload", $config);
-
-            $error = $this->upload->do_upload("photo");
+            //$this->load->library('upload', $config);
+            $this->upload->initialize($config);
+            $this->upload->do_upload("photo");
             //get profile image's save path for the db
             $fullPath = $this->upload->data('full_path');
             $fileName = substr($fullPath, mb_strrpos($fullPath, "/")+1, strlen($fullPath));
@@ -72,7 +89,7 @@ class Profileeditor extends CI_Controller {
             //configure for resume upload
             $config["file_name"] = "resume_" . $username;
             $this->upload->initialize($config);
-            $error = $this->upload->do_upload("resume");
+            $this->upload->do_upload("resume");
             //get resume's save path for the db
             $fullPath = $this->upload->data('full_path');
             $fileName = substr($fullPath, mb_strrpos($fullPath, "/")+1, strlen($fullPath));
@@ -180,6 +197,16 @@ class Profileeditor extends CI_Controller {
                 $this->link->saveProjectLinks(array("projectid" => $project["projectid"], "linkid" => $link["linkid"]), $linkData);
             }
         }
+    }
+
+    private function validateNotEmpty($items){
+        $errorMsg = "";
+        foreach($items as $key => $value){
+            if(empty($value)){
+                $errorMsg .= "$key is a required field and must not be empty <br>";
+            }
+        }
+        return $errorMsg;
     }
 
     /** Adds a project to the database
