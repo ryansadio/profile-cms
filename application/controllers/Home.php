@@ -101,6 +101,31 @@ class Home extends CI_Controller {
         $this->smarty->assign("base_colour", "midnight_blue");
         $this->smarty->assign("accent_colour", "alizarin");
 
+        $user = $this->user->getProfile($profileName);
+
+        $projects = $this->profile->getProjects($user["userid"]);
+
+        //var_dump($projects);
+
+        $allProjects = array();
+
+        foreach($projects as $project){
+
+
+            $links = $this->link->getProjectLinks($project["projectid"]);
+
+            $project["links"] = $links;
+
+            $allProjects[] = $project;
+        }
+
+        //var_dump($allProjects);
+
+
+        $this->smarty->assign("projects", $allProjects);
+
+
+        //Footer items
         $this->setProfileLinks($profile);
 
         // Render page
