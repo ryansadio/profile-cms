@@ -43,6 +43,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Profileeditor extends CI_Controller {
 
+    public function __construct(){
+        parent::__construct();
+        $this->load->library('upload');
+    }
 
     public function index($username)
     {
@@ -50,6 +54,22 @@ class Profileeditor extends CI_Controller {
 
             //set the users upload directory if not already made
             $this->setDirectoryIfNotExists($username);
+
+            //check mandatory fields if they are valid
+            $email = $this->input->post('email');
+            $name = $this->input->post('name');
+            $nusername = $this->input->post('username');
+
+            $errorMsg = $this->validateNotEmpty(array("Email" => $email, "Full Name" => $name, "Username" => $nusername));
+
+            if(!empty($errorMsg)){
+                $this->smarty->assign("notification", $errorMsg);
+                $this->loadPage($username);
+                return;
+            }
+
+            $user = $this->user->getProfile($username);
+            $id = $user["userid"];
 
             //configure uploader
             $config['upload_path'] = './uploads/' . $username . '/';
@@ -61,22 +81,36 @@ class Profileeditor extends CI_Controller {
 
             //configure for image upload
             $config["file_name"] = "profile_" . $username;
-            $this->load->library("upload", $config);
-
-            $error = $this->upload->do_upload("photo");
+            //$this->load->library('upload', $config);
+            $this->upload->initialize($config);
+            $success = $this->upload->do_upload("photo");
             //get profile image's save path for the db
-            $fullPath = $this->upload->data('full_path');
-            $fileName = substr($fullPath, mb_strrpos($fullPath, "/")+1, strlen($fullPath));
-            $profilePhoto = "../../../uploads/" . $username . "/" . $fileName;
+
+            $profilePhoto = "";
+            if($success){
+                $fullPath = $this->upload->data('full_path');
+                $fileName = substr($fullPath, mb_strrpos($fullPath, "/")+1, strlen($fullPath));
+                $profilePhoto = "/uploads/" . $username . "/" . $fileName;
+            }else{
+                $profilePhoto = $user["userpicture"];
+            }
+
 
             //configure for resume upload
             $config["file_name"] = "resume_" . $username;
             $this->upload->initialize($config);
-            $error = $this->upload->do_upload("resume");
+            $this->upload->do_upload("resume");
             //get resume's save path for the db
-            $fullPath = $this->upload->data('full_path');
-            $fileName = substr($fullPath, mb_strrpos($fullPath, "/")+1, strlen($fullPath));
-            $resumeFile = "../../../uploads/" . $username . "/" . $fileName;
+            $success = $fullPath = $this->upload->data('full_path');
+
+            $resumeFile = "";
+            if($success){
+                $fileName = substr($fullPath, mb_strrpos($fullPath, "/")+1, strlen($fullPath));
+                $resumeFile = "/uploads/" . $username . "/" . $fileName;
+            }else{
+                $resumeFile = $user["resume"];
+            }
+
 
             //parse the first name and last name from the full name input field
             $fullName = $this->input->post('name');
@@ -105,8 +139,7 @@ class Profileeditor extends CI_Controller {
 
             $this->profile->saveProfile($username, $homeData);
 
-            $user = $this->user->getProfile($username);
-            $id = $user["userid"];
+
 
             //get all known projects
             $projects = $this->profile->getProjects($id);
@@ -182,6 +215,16 @@ class Profileeditor extends CI_Controller {
         }
     }
 
+    private function validateNotEmpty($items){
+        $errorMsg = "";
+        foreach($items as $key => $value){
+            if(empty($value)){
+                $errorMsg .= "$key is a required field and must not be empty <br>";
+            }
+        }
+        return $errorMsg;
+    }
+
     /** Adds a project to the database
      * @param $username the username the project belongs to
      */
@@ -199,8 +242,6 @@ class Profileeditor extends CI_Controller {
         $id = $user["userid"];
 
         $this->profile->addNewProject($id, $newProjectName, $newProjectDescription);
-
-        //$this->loadPage($username, true);
 
         $this->load->helper('url');
         redirect('/profileeditor/' . $username);
@@ -225,7 +266,7 @@ class Profileeditor extends CI_Controller {
         $this->smarty->assign("title", $profile["firstname"] . " " . $profile["lastname"]);
         $this->smarty->assign("username", $profile["username"]);
         $this->smarty->assign("name", $profile["firstname"] . " " . $profile["lastname"]);
-        $this->smarty->assign("image", $profile["userpicture"] == null ? "" : $profile["userpicture"]);
+        $this->smarty->assign("image", $profile["userpicture"] == null ? "" : "../../.." . $profile["userpicture"]);
         $this->smarty->assign("job", $profile["jobtitle"]);
         $this->smarty->assign("email", $profile["email"]);
         $this->smarty->assign("base_colour", "midnight_blue");
@@ -246,7 +287,7 @@ class Profileeditor extends CI_Controller {
 
         $allProjects = array();
 
-        for($i = 0; $i < count($projects); $i++){
+        /*for($i = 0; $i < count($projects); $i++){
             $aProject = array();
             $aProject["image"] = $projects[$i]["projectpicture"];
             $aProject["title"] = $projects[$i]["projectname"];
@@ -269,12 +310,22 @@ class Profileeditor extends CI_Controller {
 
             $allProjects[] = $aProject;
 
+        }*/
+
+        foreach($projects as $project){
+
+            $links = $this->link->getProjectLinks($project["projectid"]);
+
+            $project["links"] = $links;
+
+            $allProjects[] = $project;
+
         }
 
         $this->smarty->assign("projects", $allProjects);
 
         // Resume
-        $this->smarty->assign("url", $profile["resume"]);
+        $this->smarty->assign("url", "../../.." . $profile["resume"]);
 
         // Render page
         $this->smarty->display("profileeditor.tpl");

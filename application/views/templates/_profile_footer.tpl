@@ -8,22 +8,24 @@
             <div class="col s4">
                 <p>&nbsp;</p>
             </div>
+            {if isset($urllinkedin)}
+                <div class="col s1">
+                    <a href="{$urllinkedin|default:"#"}"><img src="../../../assets/images/linkedin2.png" width="46"></a>
+                </div>
+            {/if}
 
-            <div class="col s1">
-                <a href="#"><img src="../../../assets/images/linkedin2.png" width="46"></a>
-            </div>
+            {if isset($urltwitter)}
+                <div class="col s1">
+                    <a href="{$urltwitter|default:"#"}"><img src="../../../assets/images/social71.png" width="46"></a>
+                </div>
+            {/if}
 
-            <div class="col s1">
-                <a href="#"><img src="../../../assets/images/social71.png" width="46"></a>
-            </div>
+            {if isset($urlgithub)}
+                <div class="col s1">
+                    <a href="{$urlgithub|default:"#"}"><img src="../../../assets/images/share6.png" width="46"></a>
+                </div>
+            {/if}
 
-            <div class="col s1">
-                <a href="#"><img src="../../../assets/images/social92.png" width="46"></a>
-            </div>
-
-            <div class="col s1">
-                <a href="#"><img src="../../../assets/images/share6.png" width="46"></a>
-            </div>
 
             <div class="col s4">
                 <p>&nbsp;</p>

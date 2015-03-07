@@ -126,10 +126,10 @@
                     <div class="row" style="border-bottom: solid 1px grey">
                         <div class="col s5">
                             {* Image *}
-                            <img src="{$project.image}" height="250px">
+                            <img src="{$project.projectpicture}" height="250px">
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input id="project_image" name="{$project.title}_image" type="file" class="validate">
+                                    <input id="project_image" name="{$project.projectname}_image" type="file" class="validate">
                                 </div>
                             </div>
                         </div>
@@ -137,22 +137,22 @@
                             {* Title *}
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input id="project_title" name="{$project.title}_title" type="text" class="validate" value="{$project.title}">
+                                    <input id="project_title" name="{$project.projectname}_title" type="text" class="validate" value="{$project.projectname}">
                                     <label for="project_title">Title</label>
                                 </div>
                             </div>
                             {* Description *}
                             <div class="row">
                                 <div class="input-field col s12">
-                                <textarea id="project_description" name="{$project.title}_description"
-                                          class="materialize-textarea validate">{$project.description}</textarea>
+                                <textarea id="project_description" name="{$project.projectname}_description"
+                                          class="materialize-textarea validate">{$project.projectdescription}</textarea>
                                     <label for="project_description">Description</label>
                                 </div>
                             </div>
                             {foreach $project.links as $link}
                                 <div class="row">
                                     <div class=""input-field col s12">
-                                        <input id="project_{$link.linkname}" name="{$project.title}_{$link.linkname}_link" type="text" class="validate" value="{$link.linkurl}">
+                                        <input id="project_{$link.linkname}" name="{$project.projectname}_{$link.linkname}_link" type="text" class="validate" value="{$link.linkurl}">
                                         <label for="project_{$link.linkname}">{$link.linkname}</label>
                                     </div>
                                 </div>

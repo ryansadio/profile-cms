@@ -49,14 +49,19 @@ class Home extends CI_Controller {
     {
         $profile = $this->user->getProfile($profileName);
         // Header items
-        $this->smarty->assign("title", $profile["firstname"] . " " . $profile["lastname"]);
-        $this->smarty->assign("profile_name", $profileName); // entered name is then assigned to links that lead to its own page
-        $this->smarty->assign("image", $profile["userpicture"] == null ? "" : $profile["userpicture"]);
-        $this->smarty->assign("name", $profile["firstname"] . " " . $profile["lastname"]);
-        $this->smarty->assign("job", $profile["jobtitle"]);
-        $this->smarty->assign("email", $profile["email"]);
+        $this->setHeaderInformation($profile);
+
+        // Body items
+        $this->smarty->assign("t1", $profile["usertitle1"]);
+        $this->smarty->assign("d1", $profile["userdescription1"]);
+        $this->smarty->assign("t2", $profile["usertitle2"]);
+        $this->smarty->assign("d2", $profile["userdescription2"]);
+        $this->smarty->assign("t3", $profile["usertitle3"]);
+        $this->smarty->assign("d3", $profile["userdescription3"]);
         $this->smarty->assign("base_colour", "midnight_blue");
         $this->smarty->assign("accent_colour", "alizarin");
+
+        $this->setProfileLinks($profile);
 
         // Render page
         $this->smarty->display("home.tpl");
@@ -69,17 +74,15 @@ class Home extends CI_Controller {
     {
         $profile = $this->user->getProfile($profileName);
         // Header items
-        $this->smarty->assign("title", $profile["firstname"] . " " . $profile["lastname"]);
-        $this->smarty->assign("profile_name", $profileName); // entered name is then assigned to links that lead to its own page
-        $this->smarty->assign("image", $profile["userpicture"] == null ? "" : $profile["userpicture"]);
-        $this->smarty->assign("name", $profile["firstname"] . " " . $profile["lastname"]);
-        $this->smarty->assign("job", $profile["jobtitle"]);
-        $this->smarty->assign("email", $profile["email"]);
+        $this->setHeaderInformation($profile);
+
+        //Body items
         $this->smarty->assign("base_colour", "midnight_blue");
         $this->smarty->assign("accent_colour", "alizarin");
+        $this->smarty->assign("url", $profile["resume"]); // the resume url
 
-        // Content
-        $this->smarty->assign("url", "../../assets/pdfs/Untitled.pdf");
+        //Footer items
+        $this->setProfileLinks($profile);
 
         // Render page
         $this->smarty->display("resume.tpl");
@@ -92,19 +95,61 @@ class Home extends CI_Controller {
     {
         $profile = $this->user->getProfile($profileName);
         // Header items
-        $this->smarty->assign("title", $profile["firstname"] . " " . $profile["lastname"]);
-        $this->smarty->assign("profile_name", $profileName); // entered name is then assigned to links that lead to its own page
-        $this->smarty->assign("image", $profile["userpicture"] == null ? "" : $profile["userpicture"]);
-        $this->smarty->assign("name", $profile["firstname"] . " " . $profile["lastname"]);
-        $this->smarty->assign("job", $profile["jobtitle"]);
-        $this->smarty->assign("email", $profile["email"]);
+        $this->setHeaderInformation($profile);
+
+        //Body items
         $this->smarty->assign("base_colour", "midnight_blue");
         $this->smarty->assign("accent_colour", "alizarin");
+
+        $user = $this->user->getProfile($profileName);
+        $projects = $this->profile->getProjects($user["userid"]);
+
+        $allProjects = array();
+        foreach($projects as $project){
+
+            $links = $this->link->getProjectLinks($project["projectid"]);
+
+            $project["links"] = $links;
+
+            $allProjects[] = $project;
+        }
+
+
+        $this->smarty->assign("projects", $allProjects);
+
+        //Footer items
+        $this->setProfileLinks($profile);
 
         // Render page
         $this->smarty->display("project.tpl");
     }
-}
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/Welcome.php */
+    /**sets links if they have been filled in by the user to the smarty template
+     * @param $profile the profile information of the user
+     */
+    private function setProfileLinks($profile){
+        if($profile["urllinkedin"] != null || $profile["urllinkedin"] != ""){
+            $this->smarty->assign("urllinkedin", $profile["urllinkedin"]);
+        }
+        if($profile["urltwitter"] != null || $profile["urltwitter"] != ""){
+            $this->smarty->assign("urltwitter", $profile["urltwitter"]);
+        }
+        if($profile["urlgithub"] != null || $profile["urlgithub"] != ""){
+            $this->smarty->assign("urlgithub", $profile["urlgithub"]);
+        }
+
+    }
+
+    /**sets the information needed for the header section of the users profile page
+     * @param $profile the profile information of the user
+     */
+    private function setHeaderInformation($profile){
+
+        $this->smarty->assign("title", $profile["firstname"] . " " . $profile["lastname"]);
+        $this->smarty->assign("profile_name", $profile["username"]); // entered name is then assigned to links that lead to its own page
+        $this->smarty->assign("image", $profile["userpicture"] == null ? "" : "../.." . $profile["userpicture"]);
+        $this->smarty->assign("name", $profile["firstname"] . " " . $profile["lastname"]);
+        $this->smarty->assign("job", $profile["jobtitle"]);
+        $this->smarty->assign("email", $profile["email"]);
+    }
+}
