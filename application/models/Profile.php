@@ -35,16 +35,23 @@ class Profile extends CI_Model{
      * @param $userid the userid the project belongs to
      * @param $projectName the name of the project
      * @param $projectDescription a description of the project
+     * @param $projectLink the link for the project, defaults to GitHub
      */
-    function addNewProject($userid, $projectName, $projectDescription){
+    function addNewProject($userid, $projectName, $projectDescription, $projectLink){
         $data = array(
             "userid" => $userid,
             "projectname" => $projectName,
             "projectdescription" => $projectDescription,
             "projectpicture" => "/assets/images/new_project_default.png"
         );
-
         $this->db->insert('projects', $data);
+
+        if (strlen($projectLink) > 0) {
+            // Must alias to a different name.  $this->link must be conflicting with some internal CI name
+            $this->load->model('link', 'projectlinks');
+            $projectId = $this->db->insert_id();
+            $this->projectlinks->newProjectLink($projectId, $projectLink);
+        }
     }
 
 
@@ -70,8 +77,13 @@ class Profile extends CI_Model{
      * If there are no results, an empty array is returned
      */
     function getProjects($userid){
-        $this->db->where('userid', $userid);
-        $queryArray = $this->db->get('projects')->result_array();
+//        $this->db->where('userid', $userid);
+//        $queryArray = $this->db->get('projects')->result_array();
+        $this->db->select('*');
+        $this->db->from('projects');
+        $this->db->join('links', 'links.projectid = projects.projectid');
+        $this->db->where('projects.userid', $userid);
+        $queryArray = $this->db->get()->result_array();
         if(empty($queryArray)){
             return array();
         }else{
