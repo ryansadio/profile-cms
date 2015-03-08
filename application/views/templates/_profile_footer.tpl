@@ -5,29 +5,25 @@
     <div class="container center">
         <div class="row">
 
-            <div class="col s4">
+            <div class="col s0 m2 l3">
                 <p>&nbsp;</p>
             </div>
+
+            <div class="col s12 m8 l6">
             {if isset($urllinkedin)}
-                <div class="col s1">
-                    <a href="{$urllinkedin|default:"#"}"><img src="../../../assets/images/linkedin2.png" width="46"></a>
-                </div>
+                    <a class="btn-spacer" href="{$urllinkedin|default:"#"}"><img src="../../../assets/images/icon_linkedin.png" width="46"></a>
             {/if}
 
             {if isset($urltwitter)}
-                <div class="col s1">
-                    <a href="{$urltwitter|default:"#"}"><img src="../../../assets/images/social71.png" width="46"></a>
-                </div>
+                    <a class="btn-spacer" href="{$urltwitter|default:"#"}"><img src="../../../assets/images/icon_twitter.png" width="46"></a>
             {/if}
 
             {if isset($urlgithub)}
-                <div class="col s1">
-                    <a href="{$urlgithub|default:"#"}"><img src="../../../assets/images/share6.png" width="46"></a>
-                </div>
+                    <a class="btn-spacer" href="{$urlgithub|default:"#"}"><img src="../../../assets/images/icon_github.png" width="46"></a>
             {/if}
+            </div>
 
-
-            <div class="col s4">
+            <div class="col s0 m2 l3">
                 <p>&nbsp;</p>
             </div>
 

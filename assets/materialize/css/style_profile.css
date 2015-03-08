@@ -70,6 +70,12 @@ p {
 }
 
 
+.btn-spacer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+
 .icon-block {
   padding: 0 15px;
 }
