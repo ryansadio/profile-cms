@@ -133,7 +133,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col s4">
+                        <div class="col s7">
                             {* Title *}
                             <div class="row">
                                 <div class="input-field col s12">
@@ -149,7 +149,8 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
-                                {$project.projectdescription}
+                                <textarea id="project_title" class="ckeditor materialize-textarea"
+                                          name="project_title">{$project.projectdescription}</textarea>
                                 </div>
                             </div>
                             {foreach $project.links as $link}
@@ -160,7 +161,15 @@
                                     </div>
                                 </div>
                             {/foreach}
-
+                            {* Buttons *}
+                            <div class="row">
+                                <button class="btn waves-effect waves-light" type="submit" name="action" formmethod="POST">Update
+                                    <i class="mdi-content-save right"></i>
+                                </button>
+                                <button class="btn waves-effect waves-light red lighten-1" >Delete
+                                    <i class="mdi-content-remove-circle-outline right"></i>
+                                </button>
+                            </div>
                             {* Link *}
                             {*<div class="row">
                                 <div class="input-field col s12">
