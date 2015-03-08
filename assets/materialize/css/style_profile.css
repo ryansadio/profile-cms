@@ -83,3 +83,8 @@ p {
 footer.page-footer {
   margin: 0;
 }
+
+#profile-edit-btn {
+    bottom: 45px;
+    right: 24px;
+}
