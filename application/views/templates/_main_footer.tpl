@@ -16,6 +16,6 @@
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="../../../assets/materialize/js/materialize.js"></script>
 <script src="../../../assets/materialize/js/init.js"></script>
-
+<script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
 </body>
 </html>

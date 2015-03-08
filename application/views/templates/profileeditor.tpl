@@ -144,9 +144,12 @@
                             {* Description *}
                             <div class="row">
                                 <div class="input-field col s12">
-                                <textarea id="project_description" name="{$project.projectname}_description"
-                                          class="materialize-textarea validate">{$project.projectdescription}</textarea>
-                                    <label for="project_description">Description</label>
+                                    <label>Description</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                {$project.projectdescription}
                                 </div>
                             </div>
                             {foreach $project.links as $link}
@@ -197,9 +200,13 @@
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <textarea id="newprojectdescription" type="text" class="materialize-textarea"
+                                        <label>Project Description</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <textarea id="newprojectdescription" class="ckeditor materialize-textarea"
                                                   name="newprojectdescription"></textarea>
-                                        <label for="newprojectdescription">Project Description</label>
                                     </div>
                                 </div>
                                 <div class="row">

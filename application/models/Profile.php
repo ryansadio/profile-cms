@@ -81,7 +81,7 @@ class Profile extends CI_Model{
 //        $queryArray = $this->db->get('projects')->result_array();
         $this->db->select('*');
         $this->db->from('projects');
-        $this->db->join('links', 'links.projectid = projects.projectid');
+        $this->db->join('links', 'links.projectid = projects.projectid', 'left');
         $this->db->where('projects.userid', $userid);
         $queryArray = $this->db->get()->result_array();
         if(empty($queryArray)){
