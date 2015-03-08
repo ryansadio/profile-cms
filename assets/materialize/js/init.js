@@ -43,3 +43,9 @@ $('#last_name').on('blur',function(e) {
         document.getElementById('username').className = "validate valid";
     }
 });
+
+// Modal for superuser deleting an account
+$(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
+});

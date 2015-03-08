@@ -5,29 +5,25 @@
     <div class="container center">
         <div class="row">
 
-            <div class="col s4">
+            <div class="col s0 m2 l3">
                 <p>&nbsp;</p>
             </div>
+
+            <div class="col s12 m8 l6">
             {if isset($urllinkedin)}
-                <div class="col s1">
-                    <a href="{$urllinkedin|default:"#"}"><img src="../../../assets/images/linkedin2.png" width="46"></a>
-                </div>
+                    <a class="btn-spacer" href="{$urllinkedin|default:"#"}"><img src="../../../assets/images/icon_linkedin.png" width="46"></a>
             {/if}
 
             {if isset($urltwitter)}
-                <div class="col s1">
-                    <a href="{$urltwitter|default:"#"}"><img src="../../../assets/images/social71.png" width="46"></a>
-                </div>
+                    <a class="btn-spacer" href="{$urltwitter|default:"#"}"><img src="../../../assets/images/icon_twitter.png" width="46"></a>
             {/if}
 
             {if isset($urlgithub)}
-                <div class="col s1">
-                    <a href="{$urlgithub|default:"#"}"><img src="../../../assets/images/share6.png" width="46"></a>
-                </div>
+                    <a class="btn-spacer" href="{$urlgithub|default:"#"}"><img src="../../../assets/images/icon_github.png" width="46"></a>
             {/if}
+            </div>
 
-
-            <div class="col s4">
+            <div class="col s0 m2 l3">
                 <p>&nbsp;</p>
             </div>
 
@@ -40,6 +36,16 @@
     </div>
 </footer>
 
+<div class="fixed-action-btn" id="profile-edit-btn">
+    <a class="btn-floating btn-large red">
+        <i class="large mdi-editor-mode-edit"></i>
+    </a>
+    <ul>
+        <li><a class="btn-floating red" title="Edit profile"><i class="large mdi-action-account-circle right"></i></a></li>
+        <li><a class="btn-floating green" title="Add/Remove projects"><i class="large mdi-action-assignment"></i></a></li>
+        <li><a class="btn-floating blue" title="Upload resume"><i class="large mdi-editor-attach-file"></i></a></li>
+    </ul>
+</div>
 
 <!--  Scripts-->
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
