@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 07, 2015 at 06:06 AM
+-- Generation Time: Mar 08, 2015 at 08:59 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -31,7 +31,15 @@ CREATE TABLE IF NOT EXISTS `links` (
   `projectid` int(50) NOT NULL,
   `linkname` varchar(200) NOT NULL,
   `linkurl` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `links`
+--
+
+INSERT INTO `links` (`linkid`, `projectid`, `linkname`, `linkurl`) VALUES
+(1, 1, 'Github', 'http://github.com'),
+(3, 3, 'GitHub', 'http://neopets.com');
 
 -- --------------------------------------------------------
 
@@ -44,8 +52,17 @@ CREATE TABLE IF NOT EXISTS `projects` (
   `userid` int(50) NOT NULL,
   `projectname` varchar(100) NOT NULL,
   `projectpicture` varchar(200) NOT NULL,
-  `projectdescription` varchar(800) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  `projectdescription` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `projects`
+--
+
+INSERT INTO `projects` (`projectid`, `userid`, `projectname`, `projectpicture`, `projectdescription`) VALUES
+(1, 1, 'Nanaimo', '', ''),
+(2, 1, '', '/assets/images/new_project_default.png', ''),
+(3, 1, 'Such project', '/assets/images/new_project_default.png', '<p>Deep Meaning and a sassy storline, was the beginning of a new future <strong>and the final frontier for little tim tim</strong>. Little did he know of what was to arrive next</p>\r\n');
 
 -- --------------------------------------------------------
 
@@ -80,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`userid`, `username`, `password`, `securityrole`, `firstname`, `lastname`, `email`, `jobtitle`, `resume`, `usertitle1`, `usertitle2`, `usertitle3`, `userpicture`, `userdescription1`, `userdescription2`, `userdescription3`, `urllinkedin`, `urltwitter`, `urlgithub`) VALUES
-(1, 'bensoer', 'password', 'user', 'Ben', 'Soer', 'ben@soernet.ca', 'PHP Developer / Entrepeneur', '../../../uploads/bensoer/resume_bensoer', 'About Me', 'Sports', 'Skills', '../../../uploads/bensoer/profile_bensoer.jpg', 'I do Stuff', 'Badminton, Biking, Hiking, Camping', 'Computers, PHP, Java, C, C++, ASP, Swift, Android', 'http://www.linkedin.com', 'http://www.twitter.com', 'http://google.com'),
+(1, 'bensoer', 'password', 'user', 'Ben', 'Soer', 'ben@soernet.ca', 'PHP Developer / Entrepeneur', '/uploads/bensoer/resume_bensoer', 'About Me', 'Sports', 'Skills', '/uploads/bensoer/profile_bensoer.jpg', 'I do Stuff', 'Badminton, Biking, Hiking, Camping', 'Computers, PHP, Java, C, C++, ASP, Swift, Android', 'http://www.linkedin.com', 'http://www.twitter.com', 'http://github.com'),
 (2, 'administrator', 'P@$$w0rd', 'admin', 'Michael', 'Adams', 'admin@vw.com', 'Web Admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
@@ -113,12 +130,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `links`
 --
 ALTER TABLE `links`
-MODIFY `linkid` int(50) NOT NULL AUTO_INCREMENT;
+MODIFY `linkid` int(50) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-MODIFY `projectid` int(50) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `projectid` int(50) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `users`
 --

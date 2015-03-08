@@ -77,13 +77,13 @@ class Profile extends CI_Model{
      * If there are no results, an empty array is returned
      */
     function getProjects($userid){
-//        $this->db->where('userid', $userid);
-//        $queryArray = $this->db->get('projects')->result_array();
-        $this->db->select('*');
-        $this->db->from('projects');
-        $this->db->join('links', 'links.projectid = projects.projectid', 'left');
-        $this->db->where('projects.userid', $userid);
-        $queryArray = $this->db->get()->result_array();
+        $this->db->where('userid', $userid);
+        $queryArray = $this->db->get('projects')->result_array();
+//        $this->db->select('*');
+//        $this->db->from('projects');
+//        $this->db->join('links', 'links.projectid = projects.projectid', 'left');
+//        $this->db->where('projects.userid', $userid);
+//        $queryArray = $this->db->get()->result_array();
         if(empty($queryArray)){
             return array();
         }else{
