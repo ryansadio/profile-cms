@@ -151,7 +151,7 @@
                             </div>
                             {foreach $project.links as $link}
                                 <div class="row">
-                                    <div class=""input-field col s12">
+                                    <div class="input-field col s12">
                                         <input id="project_{$link.linkname}" name="{$project.projectname}_{$link.linkname}_link" type="text" class="validate" value="{$link.linkurl}">
                                         <label for="project_{$link.linkname}">{$link.linkname}</label>
                                     </div>
@@ -187,6 +187,12 @@
                                     <div class="input-field col s12">
                                         <input id="newprojectname" type="text" class="validate" name="newprojectname">
                                         <label for="newprojectname">Project Name</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <label for="newprojectlink">GitHub Link</label>
+                                        <input id="newprojectlink" name="newprojectlink" type="url">
                                     </div>
                                 </div>
                                 <div class="row">
