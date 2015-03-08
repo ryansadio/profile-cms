@@ -79,3 +79,7 @@ footer.page-footer {
 .padded {
   padding: 30px;
 }
+
+.modal {
+    width: 36%;
+}
