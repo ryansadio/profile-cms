@@ -21,6 +21,20 @@ class Link extends CI_Model{
         $this->db->update('links', $linkInfo);
     }
 
+    /**
+     * Saves the link for a new project.  By default, this is the GitHub link.  Executive decision.
+     * @param $projectid the ID of the project the link is for
+     * @param $link the url of the link
+     */
+    function newProjectLink($projectid, $link) {
+        $data = array(
+            "projectid" => $projectid,
+            "linkname" => 'GitHub',
+            "linkurl" => $link
+        );
+        $this->db->insert('links', $data);
+    }
+
     /**gets all of the links belonging to a project
      * @param $projectid the id of the project we are trying to find all the links for
      * @return array an array of links which each are associative arrays of all the ifnromation to do with a link. If

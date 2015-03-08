@@ -233,15 +233,17 @@ class Profileeditor extends CI_Controller {
         //save to database the new project
         //newprojectname
         //newprojectdescription
+        //newprojectlink
 
         $newProjectName = $this->input->post('newprojectname');
         $newProjectDescription = $this->input->post('newprojectdescription');
+        $newProjectLink = $this->input->post('newprojectlink');
 
         $user = $this->user->getProfile($username);
 
         $id = $user["userid"];
 
-        $this->profile->addNewProject($id, $newProjectName, $newProjectDescription);
+        $this->profile->addNewProject($id, $newProjectName, $newProjectDescription, $newProjectLink);
 
         $this->load->helper('url');
         redirect('/profileeditor/' . $username);
