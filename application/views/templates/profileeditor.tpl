@@ -163,9 +163,6 @@
                             {/foreach}
                             {* Buttons *}
                             <div class="row">
-                                <button class="btn waves-effect waves-light" type="submit" name="action" formmethod="POST">Update
-                                    <i class="mdi-content-save right"></i>
-                                </button>
                                 <button class="btn waves-effect waves-light red lighten-1" >Delete
                                     <i class="mdi-content-remove-circle-outline right"></i>
                                 </button>
