@@ -36,16 +36,19 @@
     </div>
 </footer>
 
-<div class="fixed-action-btn" id="profile-edit-btn">
-    <a class="btn-floating btn-large red">
-        <i class="large mdi-editor-mode-edit"></i>
-    </a>
-    <ul>
-        <li><a class="btn-floating red" title="Edit profile"><i class="large mdi-action-account-circle right"></i></a></li>
-        <li><a class="btn-floating green" title="Add/Remove projects"><i class="large mdi-action-assignment"></i></a></li>
-        <li><a class="btn-floating blue" title="Upload resume"><i class="large mdi-editor-attach-file"></i></a></li>
-    </ul>
-</div>
+{if isset($loggedIn)}
+    <div class="fixed-action-btn" id="profile-edit-btn">
+        <a class="btn-floating btn-large red">
+            <i class="large mdi-editor-mode-edit"></i>
+        </a>
+        <ul>
+            <li><a class="btn-floating red" title="Edit profile" href="/profileeditor/{$profile_name}"><i class="large mdi-action-account-circle right"></i></a></li>
+            <!--<li><a class="btn-floating green" title="Add/Remove projects"><i class="large mdi-action-assignment"></i></a></li>
+            <li><a class="btn-floating blue" title="Upload resume"><i class="large mdi-editor-attach-file"></i></a></li>-->
+        </ul>
+    </div>
+{/if}
+
 
 <!--  Scripts-->
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

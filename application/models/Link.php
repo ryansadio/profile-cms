@@ -50,4 +50,9 @@ class Link extends CI_Model{
         }
     }
 
+    function deleteProjectLinks($projectid){
+        $this->db->where('projectid', $projectid);
+        $this->db->delete('links');
+    }
+
 }

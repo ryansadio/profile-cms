@@ -14,7 +14,7 @@ class Authentication extends CI_Controller{
         $route = $this->ci->router->fetch_class();
 
         //if this is not the login or signup page
-        if($route != "welcome" && $route != "signup"){
+        if($route != "welcome" && $route != "signup" && $route != "home"){
 
             //users should have a cookie from the signup page saying they are allowed in
 
@@ -23,6 +23,7 @@ class Authentication extends CI_Controller{
             $loggedIn = get_cookie('valid_login');
 
             if($loggedIn){
+                $this->smarty->assign('loggedIn', '#');
                 return;
             }else{
                 $this->load->helper('url');
