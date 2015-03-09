@@ -18,7 +18,7 @@
             <a id="logo-container" href="/" class="brand-logo green-sea-text">
                 <img src="../../../assets/images/logo1.png">
             </a>
-            
+
             {* If logged in, show name and logout buttons. *}
             {if isset($loggedIn)}
                 <div class="">

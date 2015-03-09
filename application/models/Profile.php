@@ -42,7 +42,7 @@ class Profile extends CI_Model{
             "userid" => $userid,
             "projectname" => $projectName,
             "projectdescription" => $projectDescription,
-            "projectpicture" => "/assets/images/new_project_default.png"
+            "projectpicture" => "/assets/images/default_project_header.png"
         );
         $this->db->insert('projects', $data);
 
