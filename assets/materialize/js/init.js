@@ -14,11 +14,11 @@
 });*/
 
 // Expand "Home" upon loading Edit page
-$("document").ready(function() {
+/*$("document").ready(function() {
   setTimeout(function() {
     $("ul li:first-child div").trigger('click');
   },10);
-});
+});*/
 
 // Sign-up form: Auto generate username based on first name and llast name inputs
 $('#last_name').on('blur',function(e) {

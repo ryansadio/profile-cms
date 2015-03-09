@@ -41,9 +41,9 @@
         <i class="large mdi-editor-mode-edit"></i>
     </a>
     <ul>
-        <li><a class="btn-floating red" title="Edit profile"><i class="large mdi-action-account-circle right"></i></a></li>
-        <li><a class="btn-floating green" title="Add/Remove projects"><i class="large mdi-action-assignment"></i></a></li>
-        <li><a class="btn-floating blue" title="Upload resume"><i class="large mdi-editor-attach-file"></i></a></li>
+        <li><a href="/profileeditor/{$profile_name}/#home" class="btn-floating red" title="Edit profile"><i class="large mdi-action-account-circle right"></i></a></li>
+        <li><a href="/profileeditor/{$profile_name}/#project" class="btn-floating green" title="Add/Remove projects"><i class="large mdi-action-assignment"></i></a></li>
+        <li><a href="/profileeditor/{$profile_name}/#resume" class="btn-floating blue" title="Upload resume"><i class="large mdi-editor-attach-file"></i></a></li>
     </ul>
 </div>
 
