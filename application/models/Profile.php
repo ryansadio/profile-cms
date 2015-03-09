@@ -89,7 +89,12 @@ class Profile extends CI_Model{
         }else{
             return $queryArray;
         }
+    }
 
+    function deleteProject($userid, $projectid){
+        $this->db->where('userid', $userid);
+        $this->db->where('projectid', $projectid);
+        $this->db->delete('projects');
     }
 
     /**

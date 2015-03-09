@@ -139,12 +139,16 @@ class Profileeditor extends CI_Controller {
 
             $this->profile->saveProfile($username, $homeData);
 
-
-
             //get all known projects
             $projects = $this->profile->getProjects($id);
             //update all of the projects
-            $this->updateProjects($projects, $username, $id);
+            $errorMsg = $this->updateProjects($projects, $username, $id);
+
+            if(!empty($errorMsg)){
+                $this->smarty->assign("notification", $errorMsg);
+                $this->loadPAge($username);
+                return;
+            }
 
             //inform user save was successful
             $this->smarty->assign("notification", "Your settings have been saved successfuly");
@@ -176,22 +180,47 @@ class Profileeditor extends CI_Controller {
      * @param $projects the associative array of all known projects
      * @param $username the username of the user the projects belong to
      * @param $id the id of the user the projects belong to
+     * @return string $errorMsg a string of the errors in the uploaded projects
      */
     private function updateProjects($projects, $username, $id){
+        $errorMsg = "";
         foreach($projects as $project){
 
             //re-upload the project image
+            $config['upload_path'] = './uploads/' . $username . '/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size'] = '200';
+            $config['max_width'] = '350';
+            $config['max_height'] = '250';
+            $config['overwrite'] = TRUE;
             $config["file_name"] = $project["projectname"] . "_" . $username;
             $this->upload->initialize($config);
 
             //try to upload an image. If no image was set this will fail returning FALSE
             $wasImageSet = $this->upload->do_upload($project["projectname"] . "_image");
 
+            $projectPhoto = "";
+            if($wasImageSet) {
+                $fullPath = $this->upload->data('full_path');
+                $fileName = substr($fullPath, mb_strrpos($fullPath, "/") + 1, strlen($fullPath));
+                $projectPhoto = "/uploads/" . $username . "/" . $fileName;
+            }else{
+                //get the error for thier upload issue
+                $error= $this->upload->display_errors(" Project " . $project['projectname'] . ": ", "<br>");
+
+                //don't publish an error if its because they didn't pick a file
+                if(strpos($error, 'You did not select a file to upload') === false ){
+                    $errorMsg .= $error;
+                }
+                //skip the rest of the project
+                continue;
+            }
+
             //update the project data with new data or already set data
             $projectData = array(
                 "userid" => $id,
                 "projectname" => $this->input->post($project["projectname"] . "_title"),
-                "projectpicture" => $wasImageSet ? $this->upload->data('full_path') : $project["projectpicture"], //load in the dir to the project picture
+                "projectpicture" => $wasImageSet ? $projectPhoto : $project["projectpicture"], //load in the dir to the project picture
                 "projectdescription" => $this->input->post($project["projectname"] . "_description")
 
             );
@@ -213,8 +242,15 @@ class Profileeditor extends CI_Controller {
                 $this->link->saveProjectLinks(array("projectid" => $project["projectid"], "linkid" => $link["linkid"]), $linkData);
             }
         }
+        return $errorMsg;
     }
 
+    /** determines if the passed in associative array of items contain empty information or not. It is assumed the key
+     * for each item is the name of the item being validated. This function is used to ensure mandatory data has been
+     * entered
+     * @param $items the associative array of items to be checked
+     * @return string a formatted string of errors about what field has empty data
+     */
     private function validateNotEmpty($items){
         $errorMsg = "";
         foreach($items as $key => $value){
@@ -250,6 +286,23 @@ class Profileeditor extends CI_Controller {
 
     }
 
+    /** deletes a project and all of its links from the database
+     * @param $username the username of the user whose project is being deleted
+     * @param $projectid the id of the project being deleted
+     */
+    public function deleteProject($username, $projectid){
+
+        $this->link->deleteProjectLinks($projectid);
+
+        $user = $this->profile->getProfile($username);
+
+        $this->profile->deleteProject($user["userid"], $projectid);
+
+        $this->load->helper('url');
+        redirect('/profileeditor/' . $username);
+
+    }
+
     /**loads the page with all of the required content fetched from the database
      * @param $username the name of the user the page is being loaded for
      * @param bool $fromProject whether or not the function is being called from the save project function or not. This
@@ -260,6 +313,9 @@ class Profileeditor extends CI_Controller {
         if($fromProject){
             $this->smarty->assign("active", "active");
         }
+
+        //setup the header
+        $this->setHeaderInformation();
 
         $profile = $this->profile->getProfile($username);
 
@@ -289,32 +345,6 @@ class Profileeditor extends CI_Controller {
         $projects = $this->profile->getProjects($profile["userid"]);
 
         $allProjects = array();
-
-        /*for($i = 0; $i < count($projects); $i++){
-            $aProject = array();
-            $aProject["image"] = $projects[$i]["projectpicture"];
-            $aProject["title"] = $projects[$i]["projectname"];
-            $aProject["description"] = $projects[$i]["projectdescription"];
-
-            //get all links belonging with this project
-            $links = $this->link->getProjectLinks($projects[$i]["projectid"]);
-
-            $allLinks = array();
-            foreach($links as $link){
-                $aLink = array();
-                $aLink["linkname"] = $link["linkname"];
-                $aLink["linkurl"] = $link["linkurl"];
-
-                $allLinks[] = $aLink;
-
-            }
-
-            $aProject["links"] = $allLinks;
-
-            $allProjects[] = $aProject;
-
-        }*/
-
         foreach($projects as $project){
 
             $links = $this->link->getProjectLinks($project["projectid"]);
@@ -332,6 +362,16 @@ class Profileeditor extends CI_Controller {
 
         // Render page
         $this->smarty->display("profileeditor.tpl");
+    }
+
+    /**
+     *  a helper function that sets the header bar information based off of whether the user is logged in or not
+     */
+    private function setHeaderInformation(){
+        $this->load->helper('cookie');
+        if(get_cookie('valid_login')!= null){
+            $this->smarty->assign("loggedIn", "#");
+        }
     }
 }
 

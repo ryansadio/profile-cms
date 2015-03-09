@@ -163,7 +163,8 @@
                             {/foreach}
                             {* Buttons *}
                             <div class="row">
-                                <button class="btn waves-effect waves-light red lighten-1" >Delete
+                                <button class="btn waves-effect waves-light red lighten-1"
+                                        formaction="/profileeditor/{$username}/deleteproject/{$project.projectid}" formmethod="POST">Delete
                                     <i class="mdi-content-remove-circle-outline right"></i>
                                 </button>
                             </div>

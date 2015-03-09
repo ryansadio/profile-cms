@@ -58,7 +58,7 @@ class Superuser extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
+	public function index($username)
 	{
 		$this->load->helper('cookie');
 		$cookie = get_cookie('isAdmin');
@@ -66,6 +66,12 @@ class Superuser extends CI_Controller {
 			$this->load->helper('url');
 			redirect('/');
 		}
+
+        //setup header and information
+        $this->setHeaderInformation();
+        $superuser = $this->profile->getProfile($username);
+        $this->smarty->assign("name", $superuser["firstname"] . " " . $superuser["lastname"]);
+
 
 		$users = $this->user->getAccounts();
 
@@ -89,6 +95,16 @@ class Superuser extends CI_Controller {
 		$this->load->helper('url');
 		redirect('superuser');
 	}
+
+    /**
+     * sets the header section information based on whether the user is logged in or not
+     */
+    private function setHeaderInformation(){
+        $this->load->helper('cookie');
+        if(get_cookie('valid_login')!= null){
+            $this->smarty->assign("loggedIn", "#");
+        }
+    }
 }
 
 /* End of file welcome.php */

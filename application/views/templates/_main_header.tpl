@@ -20,12 +20,14 @@
             </a>
             
             {* If logged in, show name and logout buttons. *}
-            <div class="">
-                <ul class="right hide-on-med-and-down green-sea-text">
-                    <li class="waves-red"><a href="#" class="green-sea-text ">Log out</a></li>
-                </ul>
-                <span class="green-sea-text right">Hello {$name}!</span>
-            </div>
+            {if isset($loggedIn)}
+                <div class="">
+                    <ul class="right hide-on-med-and-down green-sea-text">
+                        <li class="waves-red"><a href="/welcome/logout" class="green-sea-text ">Log out</a></li>
+                    </ul>
+                    <span class="green-sea-text right">Hello {$name}!</span>
+                </div>
+            {/if}
 
         </div>
     </div>

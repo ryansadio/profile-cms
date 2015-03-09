@@ -138,6 +138,15 @@ class Home extends CI_Controller {
             $this->smarty->assign("urlgithub", $profile["urlgithub"]);
         }
 
+
+        //determine whether to add edit menu based on whether the user is logged in. Doesn't work in hook for some reason
+        $this->load->helper('cookie');
+        $loggedIn = get_cookie('valid_login');
+
+        if($loggedIn){
+            $this->smarty->assign('loggedIn', '#');
+        }
+
     }
 
     /**sets the information needed for the header section of the users profile page
