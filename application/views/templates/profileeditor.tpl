@@ -134,7 +134,7 @@
 
                             <div class="col s12 m10 l10 left">
                                 {* Image *}
-                                <img src="{$project.projectpicture}" style="max-height:250px; max-width:900px;">
+                                <img src="{$project.projectpicture}" style="max-height:250px; max-width:100%;">
                             </div>
 
                             {* Buttons *}

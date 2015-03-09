@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-image">
                     <img src="{$project.projectpicture|default:"http://placehold.it/350x250"}"
-                         style="max-height:250px; max-width:900px;">
+                         style="max-height:250px; max-width:100%;">
                     <span class="card-title">{$project.projectname}</span>
                 </div>
                 <div class="card-content">
