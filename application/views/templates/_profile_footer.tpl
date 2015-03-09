@@ -36,7 +36,7 @@
     </div>
 </footer>
 
-{if isset(loggedIn)}
+{if isset($loggedIn)}
     <div class="fixed-action-btn" id="profile-edit-btn">
         <a class="btn-floating btn-large red">
             <i class="large mdi-editor-mode-edit"></i>
