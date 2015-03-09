@@ -79,3 +79,15 @@ footer.page-footer {
 .padded {
   padding: 30px;
 }
+
+.modal {
+    width: 36%;
+}
+
+.file-field input.file-path {
+    margin-left: 0;
+}
+
+img.responsive-img.profile-picture {
+    max-width: 180px;
+}

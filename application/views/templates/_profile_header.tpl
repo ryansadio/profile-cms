@@ -17,7 +17,7 @@
         <div class="container padded">
             <br><br>
             <div class="row center">
-                <img src="{$image}" alt="" class="circle responsive-img">
+                <img src="{$image|default:"../../assets/images/me.jpg"}" alt="" class="circle responsive-img profile-picture">
             </div>
             <h2 class="header center white-text">{$name}</h2>
             <h5 class="header center light">{$job}</h5>

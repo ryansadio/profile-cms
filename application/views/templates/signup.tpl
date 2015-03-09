@@ -10,9 +10,19 @@
                         <form class="col s10" action="/signup" method="POST">
                             <span class="card-title grey-text">New to Voodoo? Sign up.</span>
                             <div class="row">
+                                <div class="input-field col s6">
+                                    <input id="first_name" name="first_name" type="text" class="validate">
+                                    <label for="first_name">First Name</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="last_name" name="last_name" type="text" class="validate">
+                                    <label for="last_name">Last Name</label>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="input-field col s12">
-                                    <input id="full_name" name="full_name" type="text" class="validate">
-                                    <label for="full_name">Full Name</label>
+                                    <input id="username" name="username" type="text" class="validate">
+                                    <label for="username">Username</label>
                                 </div>
                             </div>
                             <div class="row">

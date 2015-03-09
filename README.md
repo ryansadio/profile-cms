@@ -1,6 +1,36 @@
 # profile-cms
 A profile content manager built on the CodeIgniter framework
 
+#Setup
+
+##Branches
+The project has been organized in a minimal branch master and dev setup. All new code is committed to the dev
+branch. Upon submission of assignment due dates, dev branch is merged into master. Then a release of the master branch
+is created, preserving the current state of the project at the point of submission of the project
+
+##Database
+To use the profile-cms project, you will need to create a localhost database named profile-cms. Then run the script
+located in the /scripts folder. This will seed your database with the required tables and a couple of accounts. At minimum
+you must keep the administrator account as this will give you access on the site to the admin info page.
+
+Credentials for the administrator account:
+email: admin@vw.com
+password: P@$$w0rd
+
+Additionally there is a standard user account that you may use:
+email: ben@soernet.ca
+password: password
+
+#Information For Marker
+ - There are two admin pages. A Site admin page that is accessible using only the admin account. This page allows admin
+ users to view accounts currently on the system and delete them if necessary. A user admin page also exists which allows
+ standard users to create / update / delete profile information belonging to thier profile page.
+ - Rich text editing is used throughout the profile editing admin page. Most specifically is when a user adds a project 
+ to thier account. Login, scrolldown and select the Projects header to expand the projects. Select the "+" button to 
+ display the create new project form
+ - Usecases are located in the github Wiki page under "Use Cases" section. [Or Click Here](https://github.com/VoodooWorks/profile-cms/wiki/Use-Cases)
+
+
 # How to use the Smarty Library in CodeIgniter
 Smarty is relatively easy and has been smoothly integrated into CodeIgniter. All of the functions available on the
 Smarty documentation are available and executable from CodeIgniter. The only difference is how you reference smarty

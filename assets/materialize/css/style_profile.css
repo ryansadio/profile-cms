@@ -70,10 +70,25 @@ p {
 }
 
 
+.btn-spacer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+
 .icon-block {
   padding: 0 15px;
 }
 
 footer.page-footer {
   margin: 0;
+}
+
+#profile-edit-btn {
+    bottom: 45px;
+    right: 24px;
+}
+
+img.responsive-img.profile-picture {
+    max-width: 180px;
 }

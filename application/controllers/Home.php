@@ -42,76 +42,124 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Home extends CI_Controller {
 
-
-   /* public function index()
-    {
-        // Header items
-        $this->smarty->assign("title", "Ben Soer");
-        $this->smarty->assign("image", "../../assets/images/me.jpg");
-        $this->smarty->assign("name", "Ben Soer");
-        $this->smarty->assign("job", "Web Developer");
-        $this->smarty->assign("email", "bsoer@bensoer.com");
-        $this->smarty->assign("base_colour", "midnight_blue");
-        $this->smarty->assign("accent_colour", "alizarin");
-
-        // Render page
-        $this->smarty->display("home.tpl");
-    }*/
-
+    /**loads the profile page of the user's pages
+     * @param $profileName the username of the user
+     */
     public function profile($profileName)
     {
         $profile = $this->user->getProfile($profileName);
         // Header items
-        $this->smarty->assign("title", $profile["name"]);
-        $this->smarty->assign("profile_name", $profileName); // entered name is then assigned to links that lead to its own page
-        $this->smarty->assign("image", "../../assets/images/me.jpg");
-        $this->smarty->assign("name", $profile["name"]);
-        $this->smarty->assign("job", "Web Developer");
-        $this->smarty->assign("email", $profile["email"]);
+        $this->setHeaderInformation($profile);
+
+        // Body items
+        $this->smarty->assign("t1", $profile["usertitle1"]);
+        $this->smarty->assign("d1", $profile["userdescription1"]);
+        $this->smarty->assign("t2", $profile["usertitle2"]);
+        $this->smarty->assign("d2", $profile["userdescription2"]);
+        $this->smarty->assign("t3", $profile["usertitle3"]);
+        $this->smarty->assign("d3", $profile["userdescription3"]);
         $this->smarty->assign("base_colour", "midnight_blue");
         $this->smarty->assign("accent_colour", "alizarin");
+
+        $this->setProfileLinks($profile);
 
         // Render page
         $this->smarty->display("home.tpl");
     }
 
+    /**loads the resume page of the user's pages
+     * @param $profileName the username of the user
+     */
     public function resume($profileName)
     {
         $profile = $this->user->getProfile($profileName);
         // Header items
-        $this->smarty->assign("title", $profile["name"]);
-        $this->smarty->assign("profile_name", $profileName); // entered name is then assigned to links that lead to its own page
-        $this->smarty->assign("image", "../../assets/images/me.jpg");
-        $this->smarty->assign("name", $profile["name"]);
-        $this->smarty->assign("job", "Web Developer");
-        $this->smarty->assign("email", $profile["email"]);
+        $this->setHeaderInformation($profile);
+
+        //Body items
         $this->smarty->assign("base_colour", "midnight_blue");
         $this->smarty->assign("accent_colour", "alizarin");
+        $this->smarty->assign("url", $profile["resume"]); // the resume url
 
-        // Content
-        $this->smarty->assign("url", "../../assets/pdfs/Untitled.pdf");
+        //Footer items
+        $this->setProfileLinks($profile);
 
         // Render page
         $this->smarty->display("resume.tpl");
     }
 
+    /** load sthe projects page of the user's pages
+     * @param $profileName the username of the user
+     */
     public function projects($profileName)
     {
         $profile = $this->user->getProfile($profileName);
         // Header items
-        $this->smarty->assign("title", $profile["name"]);
-        $this->smarty->assign("profile_name", $profileName); // entered name is then assigned to links that lead to its own page
-        $this->smarty->assign("image", "../../assets/images/me.jpg");
-        $this->smarty->assign("name", $profile["name"]);
-        $this->smarty->assign("job", "Web Developer");
-        $this->smarty->assign("email", $profile["email"]);
+        $this->setHeaderInformation($profile);
+
+        //Body items
         $this->smarty->assign("base_colour", "midnight_blue");
         $this->smarty->assign("accent_colour", "alizarin");
+
+        $user = $this->user->getProfile($profileName);
+        $projects = $this->profile->getProjects($user["userid"]);
+
+        $allProjects = array();
+        foreach($projects as $project){
+
+            $links = $this->link->getProjectLinks($project["projectid"]);
+
+            $project["links"] = $links;
+
+            $allProjects[] = $project;
+        }
+
+
+        $this->smarty->assign("projects", $allProjects);
+
+        //Footer items
+        $this->setProfileLinks($profile);
 
         // Render page
         $this->smarty->display("project.tpl");
     }
-}
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/Welcome.php */
+    /**sets links if they have been filled in by the user to the smarty template
+     * @param $profile the profile information of the user
+     */
+    private function setProfileLinks($profile){
+        if($profile["urllinkedin"] != null || $profile["urllinkedin"] != ""){
+            $this->smarty->assign("urllinkedin", $profile["urllinkedin"]);
+        }
+        if($profile["urltwitter"] != null || $profile["urltwitter"] != ""){
+            $this->smarty->assign("urltwitter", $profile["urltwitter"]);
+        }
+        if($profile["urlgithub"] != null || $profile["urlgithub"] != ""){
+            $this->smarty->assign("urlgithub", $profile["urlgithub"]);
+        }
+
+
+        //determine whether to add edit menu based on whether the user is logged in. Doesn't work in hook for some reason
+        $this->load->helper('cookie');
+        $loggedIn = get_cookie('valid_login');
+
+        if($loggedIn){
+            $this->smarty->assign('loggedIn', '#');
+        }
+
+    }
+
+    /**sets the information needed for the header section of the users profile page
+     * @param $profile the profile information of the user
+     */
+    private function setHeaderInformation($profile){
+
+        $this->smarty->assign("title", $profile["firstname"] . " " . $profile["lastname"]);
+        $this->smarty->assign("profile_name", $profile["username"]); // entered name is then assigned to links that lead to its own page
+        $this->smarty->assign("image", $profile["userpicture"] == null ?
+            $this->profile->get_gravatar($profile["email"], 180) : "../../.." . $profile["userpicture"]);
+        $this->smarty->assign("name", $profile["firstname"] . " " . $profile["lastname"]);
+        $this->smarty->assign("job", $profile["jobtitle"]);
+        $this->smarty->assign("email", $profile["email"]);
+    }
+}

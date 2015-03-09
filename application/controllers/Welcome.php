@@ -42,6 +42,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Welcome extends CI_Controller {
 
+
+    function __construct(){
+        parent::__construct();
+        $this->load->helper('url');
+    }
 	/**
 	 * Index Page for this controller.
 	 *
@@ -65,9 +70,18 @@ class Welcome extends CI_Controller {
 
 			$creds = $this->user->getCredentials($email);
 			if((!empty($creds)) && $password == $creds["password"]){
-				//$this->goToProfileEditor();
-				$this->load->helper('url');
-				redirect('profileeditor/' . $creds["username"]);
+                $this->load->helper('cookie');
+				//$this->load->helper('url');
+                set_cookie('valid_login', 'yes', 4*60*60);
+				if($creds["securityrole"] == "admin"){
+
+					set_cookie('isAdmin', 'yes', 30*60);
+					redirect('superuser/index/' . $creds["username"]);
+				}else{
+					redirect('profileeditor/' . $creds["username"]);
+				}
+
+
 			}else{
 				// return back to the main page. Going to need to return errors here aswell
 				$this->smarty->assign("title", "Welcome");
@@ -80,6 +94,19 @@ class Welcome extends CI_Controller {
 		}
 
 	}
+
+    public function logout(){
+        $this->load->helper('cookie');
+
+        delete_cookie('valid_login');
+
+        if(get_cookie('isAdmin') != null){
+            delete_cookie('isAdmin');
+        }
+
+        //$this->load->library('url');
+        redirect('/');
+    }
 
 	private function isPostRequest(){
 		return $_SERVER['REQUEST_METHOD'] == "POST";

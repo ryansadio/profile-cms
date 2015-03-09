@@ -14,9 +14,21 @@
 <body>
 <nav class="grey lighten-5" role="navigation">
     <div class="container">
-        <div class="nav-wrapper"><a id="logo-container" href="/" class="brand-logo green-sea-text">
+        <div class="nav-wrapper">
+            <a id="logo-container" href="/" class="brand-logo green-sea-text">
                 <img src="../../../assets/images/logo1.png">
             </a>
+
+            {* If logged in, show name and logout buttons. *}
+            {if isset($loggedIn)}
+                <div class="">
+                    <ul class="right hide-on-med-and-down green-sea-text">
+                        <li class="waves-red"><a href="/welcome/logout" class="green-sea-text ">Log out</a></li>
+                    </ul>
+                    <span class="green-sea-text right">Hello {$name}!</span>
+                </div>
+            {/if}
+
         </div>
     </div>
 </nav>

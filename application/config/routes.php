@@ -96,6 +96,8 @@ $route['profile/(:any)/resume'] = 'home/resume/$1';
 
 // profileeditor page rerouting
 $route['profileeditor/(:any)'] = 'profileeditor/index/$1';
+$route['profileeditor/(:any)/addproject'] = 'profileeditor/addproject/$1';
+$route['profileeditor/(:any)/deleteproject/(:num)'] = 'profileeditor/deleteproject/$1/$2';
 
 
 

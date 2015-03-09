@@ -9,7 +9,7 @@
  * @author		Kepler Gelotte
  * @link		http://www.coolphptools.com/codeigniter-smarty
  */
-require_once( BASEPATH.'libs/smarty/libs/Smarty.class.php' );
+require_once( APPPATH . '/third_party/smarty/libs/Smarty.class.php');
 
 class CI_Smarty extends Smarty {
 

@@ -1,1 +1,9 @@
-/application/config/database.php
+/.idea
+/application/views/templates_c/*
+
+#ignore all in uploads
+/uploads
+#except the gitkeep file
+!/uploads/.gitkeep
+#and demo bensoer profile
+!/uploads/bensoer/*
