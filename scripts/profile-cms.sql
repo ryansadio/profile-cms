@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 08, 2015 at 08:59 PM
+-- Generation Time: Mar 09, 2015 at 04:53 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -31,15 +31,15 @@ CREATE TABLE IF NOT EXISTS `links` (
   `projectid` int(50) NOT NULL,
   `linkname` varchar(200) NOT NULL,
   `linkurl` varchar(200) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `links`
 --
 
 INSERT INTO `links` (`linkid`, `projectid`, `linkname`, `linkurl`) VALUES
-(1, 1, 'Github', 'http://github.com'),
-(3, 3, 'GitHub', 'http://neopets.com');
+(6, 6, 'GitHub', 'https://github.com/voodooworks/profile-cms'),
+(7, 7, 'GitHub', 'http://github.com');
 
 -- --------------------------------------------------------
 
@@ -53,16 +53,15 @@ CREATE TABLE IF NOT EXISTS `projects` (
   `projectname` varchar(100) NOT NULL,
   `projectpicture` varchar(200) NOT NULL,
   `projectdescription` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `projects`
 --
 
 INSERT INTO `projects` (`projectid`, `userid`, `projectname`, `projectpicture`, `projectdescription`) VALUES
-(1, 1, 'Nanaimo', '', ''),
-(2, 1, '', '/assets/images/new_project_default.png', ''),
-(3, 1, 'Such project', '/assets/images/new_project_default.png', '<p>Deep Meaning and a sassy storline, was the beginning of a new future <strong>and the final frontier for little tim tim</strong>. Little did he know of what was to arrive next</p>\r\n');
+(6, 1, 'Profile-CMS', '/assets/images/default_project_header.png', '<p>A profile builder website</p>\r\n'),
+(7, 1, 'Tessera', '/assets/images/default_project_header.png', '<p>Aggregated site data in the cloud</p>\r\n');
 
 -- --------------------------------------------------------
 
@@ -90,15 +89,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `urllinkedin` varchar(200) DEFAULT NULL,
   `urltwitter` varchar(200) DEFAULT NULL,
   `urlgithub` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`userid`, `username`, `password`, `securityrole`, `firstname`, `lastname`, `email`, `jobtitle`, `resume`, `usertitle1`, `usertitle2`, `usertitle3`, `userpicture`, `userdescription1`, `userdescription2`, `userdescription3`, `urllinkedin`, `urltwitter`, `urlgithub`) VALUES
-(1, 'bensoer', 'password', 'user', 'Ben', 'Soer', 'ben@soernet.ca', 'PHP Developer / Entrepeneur', '/uploads/bensoer/resume_bensoer', 'About Me', 'Sports', 'Skills', '/uploads/bensoer/profile_bensoer.jpg', 'I do Stuff', 'Badminton, Biking, Hiking, Camping', 'Computers, PHP, Java, C, C++, ASP, Swift, Android', 'http://www.linkedin.com', 'http://www.twitter.com', 'http://github.com'),
-(2, 'administrator', 'P@$$w0rd', 'admin', 'Michael', 'Adams', 'admin@vw.com', 'Web Admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 'bensoer', 'password', 'user', 'Ben', 'Soer', 'ben@soernet.ca', 'PHP Developer / Entrepeneur', '/uploads/bensoer/resume_bensoer.pdf', 'About Me', 'Sports', 'Skills', '/uploads/bensoer/profile_bensoer.jpg', 'I do Stuff', 'Badminton, Biking, Hiking, Camping', 'Computers, PHP, Java, C, C++, ASP, Swift, Android', 'http://www.linkedin.com', 'http://www.twitter.com', 'http://github.com'),
+(2, 'administrator', 'P@$$w0rd', 'admin', 'Michael', 'Adams', 'admin@vw.com', 'Web Admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 'berttownshend', 'password', 'user', 'Bert', 'Townshend', 'btown@bcit.ca', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -130,17 +130,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `links`
 --
 ALTER TABLE `links`
-MODIFY `linkid` int(50) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `linkid` int(50) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-MODIFY `projectid` int(50) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `projectid` int(50) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `userid` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `userid` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --

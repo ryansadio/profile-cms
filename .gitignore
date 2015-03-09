@@ -6,4 +6,4 @@
 #except the gitkeep file
 !/uploads/.gitkeep
 #and demo bensoer profile
-!/uploads/bensoer
+!/uploads/bensoer/*
