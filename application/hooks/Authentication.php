@@ -8,6 +8,11 @@
 
 class Authentication extends CI_Controller{
 
+    /**
+     * validates all controllers except the welcome, signup and home controller as to whether the user is logged in
+     * or not. User's who are not logged in do not have access to editing features of the website and therefor are
+     * forwarded to the home page to sign up or login
+     */
     public function validate(){
 
         $this->ci = &get_instance();

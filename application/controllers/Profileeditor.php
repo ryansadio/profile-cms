@@ -139,8 +139,6 @@ class Profileeditor extends CI_Controller {
 
             $this->profile->saveProfile($username, $homeData);
 
-
-
             //get all known projects
             $projects = $this->profile->getProjects($id);
             //update all of the projects
@@ -183,9 +181,9 @@ class Profileeditor extends CI_Controller {
             //re-upload the project image
             $config['upload_path'] = './uploads/' . $username . '/';
             $config['allowed_types'] = 'gif|jpg|png';
-            $config['max_size']     = '200';
-            $config['max_width'] = '1024';
-            $config['max_height'] = '768';
+            $config['max_size'] = '200';
+            $config['max_width'] = '350';
+            $config['max_height'] = '250';
             $config['overwrite'] = TRUE;
             $config["file_name"] = $project["projectname"] . "_" . $username;
             $this->upload->initialize($config);
@@ -228,6 +226,12 @@ class Profileeditor extends CI_Controller {
         }
     }
 
+    /** determines if the passed in associative array of items contain empty information or not. It is assumed the key
+     * for each item is the name of the item being validated. This function is used to ensure mandatory data has been
+     * entered
+     * @param $items the associative array of items to be checked
+     * @return string a formatted string of errors about what field has empty data
+     */
     private function validateNotEmpty($items){
         $errorMsg = "";
         foreach($items as $key => $value){
@@ -263,6 +267,10 @@ class Profileeditor extends CI_Controller {
 
     }
 
+    /** deletes a project and all of its links from the database
+     * @param $username the username of the user whose project is being deleted
+     * @param $projectid the id of the project being deleted
+     */
     public function deleteProject($username, $projectid){
 
         $this->link->deleteProjectLinks($projectid);
@@ -336,6 +344,9 @@ class Profileeditor extends CI_Controller {
         $this->smarty->display("profileeditor.tpl");
     }
 
+    /**
+     *  a helper function that sets the header bar information based off of whether the user is logged in or not
+     */
     private function setHeaderInformation(){
         $this->load->helper('cookie');
         if(get_cookie('valid_login')!= null){

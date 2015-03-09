@@ -96,6 +96,9 @@ class Superuser extends CI_Controller {
 		redirect('superuser');
 	}
 
+    /**
+     * sets the header section information based on whether the user is logged in or not
+     */
     private function setHeaderInformation(){
         $this->load->helper('cookie');
         if(get_cookie('valid_login')!= null){
