@@ -3,7 +3,7 @@
     <div class="col s12 m2 l1"><p>&nbsp;</p></div>
     <div class="col s12 m8 l10">
         <div class="row">
-            <div class="col s7 white-text">
+            <div class="col s7">
                 <h4 class="header">Welcome to Voodoo Works.</h4>
 
                 <p class="flow-text">
