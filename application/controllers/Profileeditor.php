@@ -142,7 +142,13 @@ class Profileeditor extends CI_Controller {
             //get all known projects
             $projects = $this->profile->getProjects($id);
             //update all of the projects
-            $this->updateProjects($projects, $username, $id);
+            $errorMsg = $this->updateProjects($projects, $username, $id);
+
+            if(!empty($errorMsg)){
+                $this->smarty->assign("notification", $errorMsg);
+                $this->loadPAge($username);
+                return;
+            }
 
             //inform user save was successful
             $this->smarty->assign("notification", "Your settings have been saved successfuly");
@@ -176,6 +182,7 @@ class Profileeditor extends CI_Controller {
      * @param $id the id of the user the projects belong to
      */
     private function updateProjects($projects, $username, $id){
+        $errorMsg = "";
         foreach($projects as $project){
 
             //re-upload the project image
@@ -196,6 +203,9 @@ class Profileeditor extends CI_Controller {
                 $fullPath = $this->upload->data('full_path');
                 $fileName = substr($fullPath, mb_strrpos($fullPath, "/") + 1, strlen($fullPath));
                 $projectPhoto = "/uploads/" . $username . "/" . $fileName;
+            }else{
+                $errorMsg .= $this->upload->display_errors(" Project " . $project['projectname'] . ": ", "<br>");
+                continue;
             }
 
             //update the project data with new data or already set data
@@ -224,6 +234,7 @@ class Profileeditor extends CI_Controller {
                 $this->link->saveProjectLinks(array("projectid" => $project["projectid"], "linkid" => $link["linkid"]), $linkData);
             }
         }
+        return $errorMsg;
     }
 
     /** determines if the passed in associative array of items contain empty information or not. It is assumed the key
