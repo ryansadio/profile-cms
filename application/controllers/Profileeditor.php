@@ -180,6 +180,7 @@ class Profileeditor extends CI_Controller {
      * @param $projects the associative array of all known projects
      * @param $username the username of the user the projects belong to
      * @param $id the id of the user the projects belong to
+     * @return string $errorMsg a string of the errors in the uploaded projects
      */
     private function updateProjects($projects, $username, $id){
         $errorMsg = "";
