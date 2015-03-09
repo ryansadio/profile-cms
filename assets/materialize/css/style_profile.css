@@ -88,3 +88,7 @@ footer.page-footer {
     bottom: 45px;
     right: 24px;
 }
+
+img.responsive-img.profile-picture {
+    max-width: 180px;
+}
