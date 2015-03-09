@@ -268,7 +268,8 @@ class Profileeditor extends CI_Controller {
         $this->smarty->assign("title", $profile["firstname"] . " " . $profile["lastname"]);
         $this->smarty->assign("username", $profile["username"]);
         $this->smarty->assign("name", $profile["firstname"] . " " . $profile["lastname"]);
-        $this->smarty->assign("image", $profile["userpicture"] == null ? "" : "../../.." . $profile["userpicture"]);
+        $this->smarty->assign("image", $profile["userpicture"] == null ?
+            $this->profile->get_gravatar($profile["email"], 180) : "../../.." . $profile["userpicture"]);
         $this->smarty->assign("job", $profile["jobtitle"]);
         $this->smarty->assign("email", $profile["email"]);
         $this->smarty->assign("base_colour", "midnight_blue");
