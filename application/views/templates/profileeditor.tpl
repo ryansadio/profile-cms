@@ -139,7 +139,9 @@
 
                             {* Buttons *}
                             <div class="col s12 m2 l2 right">
-                                <button class="btn waves-effect waves-light red lighten-1 right " >Remove
+                                <button class="btn waves-effect waves-light red lighten-1 right "
+                                        formaction="/profileeditor/{$username}/deleteproject/{$project.projectid}"
+                                        formmethod="POST">Remove
                                     <i class="mdi-content-remove-circle-outline right"></i>
                                 </button>
                             </div>
@@ -148,7 +150,8 @@
                         {* Title *}
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="project_title" name="{$project.projectname}_title" type="text" class="validate" value="{$project.projectname}">
+                                <input id="project_title" name="{$project.projectname}_title" type="text"
+                                       class="validate" value="{$project.projectname}">
                                 <label for="project_title">Title</label>
                             </div>
                         </div>
@@ -164,7 +167,7 @@
 
                                 <div class="col s10 right">
                                     {* Name of file *}
-                                    <input class="file-path validate" name="{$project.projectname}_image" type="text"/>
+                                    <input class="file-path validate"  type="text"/>
                                 </div>
 
                             </div>
@@ -235,23 +238,23 @@
                                     <input id="newprojectlink" name="newprojectlink" type="url">
                                 </div>
                             </div>
-                            {* Image file *}
-                            <div class="row">
-                                <div class="file-field input-field ">
+                            {* Image file - CURRENTLY NOT SUPPORTED *}
+                            {*<div class="row">
+                                <div class="file-field input-field ">*}
 
                                     {* Select file button *}
-                                    <div class="btn col s2">
+                                    {*<div class="btn col s2">
                                         <span>Thumbnail</span>
                                         <input type="file" id="project_image" name="{$project.projectname}_image"  />
                                     </div>
 
-                                    <div class="col s10 right">
+                                    <div class="col s10 right">*}
                                         {* Name of file *}
-                                        <input class="file-path validate" name="{$project.projectname}_image" type="text"/>
+                                        {*<input class="file-path validate" name="{$project.projectname}_image" type="text"/>
                                     </div>
 
                                 </div>
-                            </div>
+                            </div>*}
                             <div class="row">
                                 <div class="input-field col s12">
                                     <label>Project Description</label>
@@ -275,9 +278,9 @@
                                             formmethod="POST">Add
                                         <i class="mdi-content-send right"></i>
                                     </button>
-                                    <button class="btn waves-effect waves-light"
+                                    {*<button class="btn waves-effect waves-light"
                                             type="reset">Reset
-                                    </button>
+                                    </button>*}
                                 </div>
                             </div>
                         </div>

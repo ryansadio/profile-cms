@@ -190,7 +190,7 @@ class Profileeditor extends CI_Controller {
             $config['upload_path'] = './uploads/' . $username . '/';
             $config['allowed_types'] = 'gif|jpg|png';
             $config['max_size'] = '200';
-            $config['max_width'] = '350';
+            $config['max_width'] = '900';
             $config['max_height'] = '250';
             $config['overwrite'] = TRUE;
             $config["file_name"] = $project["projectname"] . "_" . $username;
