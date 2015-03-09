@@ -5,7 +5,8 @@
         <div class="col s12">
             <div class="card">
                 <div class="card-image">
-                    <img src="{$project.projectpicture|default:"http://placehold.it/350x250"}" height="250px">
+                    <img src="{$project.projectpicture|default:"http://placehold.it/350x250"}"
+                         style="max-height:250px; max-width:900px;">
                     <span class="card-title">{$project.projectname}</span>
                 </div>
                 <div class="card-content">
