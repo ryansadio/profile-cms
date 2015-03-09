@@ -204,7 +204,14 @@ class Profileeditor extends CI_Controller {
                 $fileName = substr($fullPath, mb_strrpos($fullPath, "/") + 1, strlen($fullPath));
                 $projectPhoto = "/uploads/" . $username . "/" . $fileName;
             }else{
-                $errorMsg .= $this->upload->display_errors(" Project " . $project['projectname'] . ": ", "<br>");
+                //get the error for thier upload issue
+                $error= $this->upload->display_errors(" Project " . $project['projectname'] . ": ", "<br>");
+
+                //don't publish an error if its because they didn't pick a file
+                if(strpos($error, 'You did not select a file to upload') === false ){
+                    $errorMsg .= $error;
+                }
+                //skip the rest of the project
                 continue;
             }
 
